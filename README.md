@@ -3,6 +3,7 @@
 Python tools for auto-generating HTML from CESM and CIME XML configuration files.
 
 ## Requirements
+  
   CIME v?
   
   CESM >= 2.0.beta09
@@ -11,6 +12,8 @@ Python tools for auto-generating HTML from CESM and CIME XML configuration files
   
   >pip install --user jinja2
 
+  CIMEROOT environment varible pointing to local CIME root location
+  
 ## Python tools
 
 ***************************************************

@@ -12,7 +12,7 @@ Python tools for auto-generating HTML from CESM and CIME XML configuration files
   
   >pip install --user jinja2
 
-  CIMEROOT environment varible pointing to local CIME root location
+  CIMEROOT environment variable pointing to local CIME root location
   
 ## Python tools
 

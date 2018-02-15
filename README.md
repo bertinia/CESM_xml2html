@@ -16,15 +16,13 @@ Python tools for auto-generating HTML from CESM and CIME XML configuration files
 ***************************************************
 Steps to generate namelist definitions to html
 
-nmldef2html.py
-
 Synopsis:
   Parses a namelist XML file and generates a html page. Note: some namelist
   values are not valid in XML. The "&" character needs to be manually modified
   to be "&amp;" in order for the schema checks to work correctly. 
 
 Example:
-  >./nmldef2html.py 
+  >nmldef2html.py 
     --nmlfile ~/cesm2_0_alpha06/cime/src/drivers/mct/cime_config/namelist_definition_drv.xml 
     --comp Driver 
     --htmlfile drv.html
@@ -38,22 +36,22 @@ Example:
   or copy the drv.html file to a web server for remote viewing.
   
 Options:
-  >./nmldef2html.py --help
+  >nmldef2html.py --help
 
 ***************************************************
 Steps to generate compsets html 
 
-   ./compdef2html.py --htmlfile compsets.html --version CESM2.0
+   >compdef2html.py --htmlfile compsets.html --version CESM2.0
 
 ***************************************************
 Steps to generate the grids html
 
-1. run query_config --grids --long > ./Tools/xml2html/grids.txt
+1. run cime/scripts/query_config --grids --long > rids.txt
 2. edit the grids.txt to remove all lines up to the first line containing 'alias:'
-2. ./griddef2html.py --txtfile grids.txt --htmlfile grids.html --version CESM2.0
+2. griddef2html.py --txtfile grids.txt --htmlfile grids.html --version CESM2.0
 
 ***************************************************
 
 Steps to generate the machines html
 
-./machdef2html.py --htmlfile machines.html --version CESM2.0 --supported yellowstone,cheyenne --tested edison,hobart,cori-knl,cori-haswell,yellowstone,cheyenne
+  >machdef2html.py --htmlfile machines.html --version CESM2.0 --supported yellowstone,cheyenne --tested edison,hobart,cori-knl,cori-haswell,yellowstone,cheyenne

@@ -4,8 +4,11 @@ Python tools for auto-generating HTML from CESM and CIME XML configuration files
 
 ## Requirements
   CIME v?
+  
   CESM >= 2.0.beta09
+  
   jinja2 template python module available from https://pypi.python.org/pypi/Jinja2
+  
   >pip install --user jinja2
 
 ## Python tools

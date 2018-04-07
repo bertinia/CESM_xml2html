@@ -164,12 +164,11 @@ def _main_func(options, work_dir):
                 if schema == "new":
                     raw_desc = definition.get_element_text("desc", root=node)
                 else:
-                    raw_desc = definition.text(node)
-##                    raw_desc_test = definition.get_raw_record(node)
-                    raw_desc = re.sub(r"{{ hilight }}", hilight, raw_desc)
-                    raw_desc = re.sub(r"{{ closehilight }}", closehilight, raw_desc)
-##                    node_xml = ET.fromstring(raw_desc_test)
-##                    raw_desc = ET.tostring(node_xml, encoding="utf-8", method="text")
+                    raw_desc_test = definition.get_raw_record(node)
+                    raw_desc_test = re.sub(r"<varname>", "{{ hilight }}", raw_desc_test)
+                    raw_desc_test = re.sub(r"<\/varname>", "{{ closehilight }}", raw_desc_test)
+                    node_xml = ET.fromstring(raw_desc_test)
+                    raw_desc = ET.tostring(node_xml, encoding="utf-8", method="text")
 
                 if raw_desc is not None: 
                     desc = ' '.join(raw_desc.split())

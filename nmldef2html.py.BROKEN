@@ -20,8 +20,6 @@ sys.path.append(os.path.join(CIMEROOT, "scripts", "Tools"))
 from standard_script_setup import *
 from CIME.utils import expect
 from CIME.XML.generic_xml import GenericXML
-import xml.etree.ElementTree as ET
-import re
 
 # check for  dependency module
 try:
@@ -36,8 +34,7 @@ _comps = ['AQUAP', 'CAM', 'CLM', 'CISM', 'POP2', 'CICE', 'RTM', 'MOSART', 'WW3',
           'Driver', 'DATM', 'DESP', 'DICE', 'DLND', 'DOCN', 'DROF', 'DWAV']
 _cime_comps = ['Driver', 'DATM', 'DESP', 'DICE', 'DLND', 'DOCN', 'DROF', 'DWAV']
 logger = logging.getLogger(__name__)
-hilight = '<span style="color:blue">'
-closehilight = '</span>'
+
 
 ###############################################################################
 def commandline_options():
@@ -92,14 +89,9 @@ def _main_func(options, work_dir):
     if len(default_files) > 0:
         schema = "old"
         for default_file in default_files:
-            default = GenericXML(infile=default_file)
-            default.read(infile=default_file, schema=schema)
-            defaults.append(default)
+            defaults.append(GenericXML(infile=default_file))
     else:
         schema = "new"
-
-    # read the file into the definition object
-    definition.read(infile=filename, schema=schema)
 
     # Initialize a variables for the html template
     html_dict = dict()
@@ -120,11 +112,11 @@ def _main_func(options, work_dir):
 
     # Create a dictionary with a category key and a list of all entry nodes for each key
     category_dict = dict()
-    for node in definition.get_children("entry"):
+    for node in definition.get_nodes("entry"):
         if schema == "new":
             category = definition.get_element_text("category", root=node)
         else:
-            category = definition.get(node, "category")
+            category = node.get("category")
         if category in category_dict:
             category_dict[category].append(node)
         else:
@@ -139,7 +131,7 @@ def _main_func(options, work_dir):
             if schema == "new":
                 group = definition.get_element_text("group", root=node)
             else:
-                group = definition.get(node, "group") 
+                group = node.get("group") 
             if group in groups_dict:
                 groups_dict[group].append(node) 
             else:
@@ -156,20 +148,19 @@ def _main_func(options, work_dir):
                 # @ is used in a namelist to put the same namelist variable in multiple groups
                 # in the write phase, all characters in the namelist variable name after 
                 # the @ and including the @ should be removed
-                name = definition.get(node, "id")
+                name = node.get("id")
                 if "@" in name:
                     name = re.sub('@.+$', "", name)
 
                 # Create the information for this node - start with the description
+
+                # TODO - in desc field need to substitute <varname> and </varname>
+                # markup with an html span element that styles to blue
+                # this is currently in the the cam namelist_definition.xml file
                 if schema == "new":
                     raw_desc = definition.get_element_text("desc", root=node)
                 else:
-                    raw_desc = definition.text(node)
-##                    raw_desc_test = definition.get_raw_record(node)
-                    raw_desc = re.sub(r"{{ hilight }}", hilight, raw_desc)
-                    raw_desc = re.sub(r"{{ closehilight }}", closehilight, raw_desc)
-##                    node_xml = ET.fromstring(raw_desc_test)
-##                    raw_desc = ET.tostring(node_xml, encoding="utf-8", method="text")
+                    raw_desc = node.text 
 
                 if raw_desc is not None: 
                     desc = ' '.join(raw_desc.split())
@@ -181,16 +172,16 @@ def _main_func(options, work_dir):
                 if schema == "new":
                     entry_type = definition.get_element_text("type", root=node)
                 else:
-                    entry_type = definition.get(node, "type")
+                    entry_type = node.get("type")
 
                 # add valid_values
                 if schema == "new":
                     valid_values = definition.get_element_text("valid_values", root=node)
                 else:
-                    valid_values = definition.get(node, "valid_values")
+                    valid_values = node.get("valid_values")
                     
                 if entry_type == "logical":
-                    valid_values = ".true.,.false."
+                    valid_values = ".true.,.false"
                 else:
                     if not valid_values:
                         valid_values = "any " + entry_type
@@ -199,7 +190,7 @@ def _main_func(options, work_dir):
 
                 if valid_values is not None:
                     valid_values = valid_values.split(',')
-
+                    
                 # add default values
                 values = ""
                 if schema == "new":
@@ -214,16 +205,15 @@ def _main_func(options, work_dir):
                                 values += "value is %s for: %s <br/>" %(value, value_node.attrib)
                             else:
                                 values += "value: %s <br/>" %(value)
-##                else:
-##                    for default in defaults:
-##                        for node in default.get_children():
-##                            value_nodes = default.get(node, name)
-##                            if value_nodes is not None and len(value_nodes) > 0:
-##                                for value_node in value_nodes:
-##                                    if value_node.attrib:
-##                                        values += "value is %s for: %s <br/>" %(value_node.text, value_node.attrib)
-##                                    else:
-##                                        values += "value: %s <br/>" %(value_node.text)
+                else:
+                    for default in defaults:
+                        value_nodes = default.get_nodes(name)
+                        if len(value_nodes) > 0:
+                            for value_node in value_nodes:
+                                if value_node.attrib:
+                                    values += "value is %s for: %s <br/>" %(value_node.text, value_node.attrib)
+                                else:
+                                    values += "value: %s <br/>" %(value_node.text)
 
                 # create the node dictionary
                 node_dict = { 'name'        : name,
@@ -253,9 +243,7 @@ def _main_func(options, work_dir):
                      'cesm_version' : cesm_version,
                      'comp'         : comp,
                      'comptag'      : comptag,
-                     'compversion'  : compversion,
-                     'hilight'      : hilight,
-                     'closehilight' : closehilight
+                     'compversion'  : compversion
                  }
         
     # render the template
@@ -272,8 +260,7 @@ def _main_func(options, work_dir):
 if __name__ == "__main__":
 
     options = commandline_options()
-##    work_dir = os.path.join(CIMEROOT,"scripts","Tools","xml2html")
-    work_dir = os.getcwd()
+    work_dir = os.path.join(CIMEROOT,"scripts","Tools","xml2html")
     try:
         status = _main_func(options, work_dir)
         sys.exit(status)

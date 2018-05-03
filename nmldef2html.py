@@ -20,6 +20,7 @@ sys.path.append(os.path.join(CIMEROOT, "scripts", "Tools"))
 from standard_script_setup import *
 from CIME.utils import expect
 from CIME.XML.generic_xml import GenericXML
+from CIME.XML.namelist_definition import NamelistDefinition
 import xml.etree.ElementTree as ET
 import re
 
@@ -35,6 +36,29 @@ _now = datetime.datetime.now().strftime('%Y-%m-%d')
 _comps = ['AQUAP', 'CAM', 'CLM', 'CISM', 'POP2', 'CICE', 'RTM', 'MOSART', 'WW3', 
           'Driver', 'DATM', 'DESP', 'DICE', 'DLND', 'DOCN', 'DROF', 'DWAV']
 _cime_comps = ['Driver', 'DATM', 'DESP', 'DICE', 'DLND', 'DOCN', 'DROF', 'DWAV']
+_exclude_groups = {
+    'AQUAP': [],
+    'CAM': ['cime_driver_inst','seq_cplflds_inparm','seq_cplflds_userspec',
+            'ccsm_pes','seq_infodata_inparm','seq_timemgr_inparm',
+            'prof_inparm','papi_inparm','pio_default_inparm',
+            'drydep_inparm','megan_emis_nl','fire_emis_nl',
+            'carma_inparm','ndep_inparm','dom_inparm',
+            'docn_nml','shr_strdata_nml','aquap_nl'],
+    'CLM': [],
+    'CISM': [],
+    'POP2': [],
+    'CICE': [],
+    'RTM' : [],
+    'MOSART': [],
+    'WW3': [],
+    'Driver': [],
+    'DATM': [],
+    'DESP': [],
+    'DICE': [],
+    'DLND': [],
+    'DOCN': [],
+    'DROF': [],
+    'DWAV': []}
 logger = logging.getLogger(__name__)
 hilight = '<span style="color:blue">'
 closehilight = '</span>'
@@ -101,9 +125,9 @@ def _main_func(options, work_dir):
     # read the file into the definition object
     definition.read(infile=filename, schema=schema)
 
-    # Initialize a variables for the html template
+    # Initialize variables for the html template
     html_dict = dict()
-    cesm_version = 'CESM2.0'
+    cesm_version = 'CESM2'
     comp = ''
     if options.comp:
         comp = options.comp[0]
@@ -140,10 +164,11 @@ def _main_func(options, work_dir):
                 group = definition.get_element_text("group", root=node)
             else:
                 group = definition.get(node, "group") 
-            if group in groups_dict:
-                groups_dict[group].append(node) 
-            else:
-                groups_dict[group] = [ node ]
+            if group not in _exclude_groups[comp]:
+                if group in groups_dict:
+                    groups_dict[group].append(node) 
+                else:
+                    groups_dict[group] = [ node ]
 
         # Loop over the keys
         group_list = list()
@@ -165,17 +190,8 @@ def _main_func(options, work_dir):
                     raw_desc = definition.get_element_text("desc", root=node)
                 else:
                     raw_desc = definition.text(node)
-##                    raw_desc_test = definition.get_raw_record(node)
-                    raw_desc = re.sub(r"{{ hilight }}", hilight, raw_desc)
-                    raw_desc = re.sub(r"{{ closehilight }}", closehilight, raw_desc)
-##                    node_xml = ET.fromstring(raw_desc_test)
-##                    raw_desc = ET.tostring(node_xml, encoding="utf-8", method="text")
-
-                if raw_desc is not None: 
-                    desc = ' '.join(raw_desc.split())
-                    short_desc = desc[:75] + (desc[75:] and '...')
-                else:
-                    desc = ''
+                desc = re.sub(r"{{ hilight }}", hilight, raw_desc)
+                desc = re.sub(r"{{ closehilight }}", closehilight, desc)
 
                 # add type
                 if schema == "new":
@@ -203,7 +219,7 @@ def _main_func(options, work_dir):
                 # add default values
                 values = ""
                 if schema == "new":
-                    value_nodes = definition.get_nodes('value', root=node)
+                    value_nodes = definition.get(node,'value')
                     if value_nodes is not None and len(value_nodes) > 0:
                         for value_node in value_nodes:
                             try:
@@ -214,7 +230,8 @@ def _main_func(options, work_dir):
                                 values += "value is %s for: %s <br/>" %(value, value_node.attrib)
                             else:
                                 values += "value: %s <br/>" %(value)
-##                else:
+                # exclude getting CAM default value - it is included in the description text
+##                elif comp != 'CAM':
 ##                    for default in defaults:
 ##                        for node in default.get_children():
 ##                            value_nodes = default.get(node, name)
@@ -223,12 +240,11 @@ def _main_func(options, work_dir):
 ##                                    if value_node.attrib:
 ##                                        values += "value is %s for: %s <br/>" %(value_node.text, value_node.attrib)
 ##                                    else:
-##                                        values += "value: %s <br/>" %(value_node.text)
+##                                        values += "value: %s <br/>" %(value_node)
 
                 # create the node dictionary
                 node_dict = { 'name'        : name,
                               'desc'        : desc,
-                              'short_desc'  : short_desc,
                               'entry_type'  : entry_type,
                               'valid_values': valid_values,
                               'value'       : values,
@@ -245,7 +261,7 @@ def _main_func(options, work_dir):
     templateLoader = jinja2.FileSystemLoader( searchpath='{0}/templates'.format(work_dir) )
     templateEnv = jinja2.Environment( loader=templateLoader )
 
-    # TODO - get the cesm_version for the CIME root
+    # populate the template variables
     tmplFile = 'nmldef2html.tmpl'
     template = templateEnv.get_template( tmplFile )
     templateVars = { 'html_dict'    : html_dict,
@@ -272,7 +288,6 @@ def _main_func(options, work_dir):
 if __name__ == "__main__":
 
     options = commandline_options()
-##    work_dir = os.path.join(CIMEROOT,"scripts","Tools","xml2html")
     work_dir = os.getcwd()
     try:
         status = _main_func(options, work_dir)

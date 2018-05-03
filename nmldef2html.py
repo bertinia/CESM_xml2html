@@ -233,7 +233,7 @@ def _main_func(options, work_dir):
                 # exclude getting CAM default value - it is included in the description text
                 elif comp != 'CAM':
                     for default in defaults:
-                        for node in default.get_children():
+                        for node in default.get_children(name=name):
                             if default.attrib(node):
                                 values += "value is %s for: %s <br/>" %(default.text(node), default.attrib(node))
                             else:

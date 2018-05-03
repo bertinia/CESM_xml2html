@@ -36,6 +36,7 @@ _now = datetime.datetime.now().strftime('%Y-%m-%d')
 _comps = ['AQUAP', 'CAM', 'CLM', 'CISM', 'POP2', 'CICE', 'RTM', 'MOSART', 'WW3', 
           'Driver', 'DATM', 'DESP', 'DICE', 'DLND', 'DOCN', 'DROF', 'DWAV']
 _cime_comps = ['Driver', 'DATM', 'DESP', 'DICE', 'DLND', 'DOCN', 'DROF', 'DWAV']
+_exclude_defaults_comps = ['CAM','POP','CISM']
 _exclude_groups = {
     'AQUAP': [],
     'CAM': ['cime_driver_inst','seq_cplflds_inparm','seq_cplflds_userspec',
@@ -230,25 +231,22 @@ def _main_func(options, work_dir):
                                 values += "value is %s for: %s <br/>" %(value, value_node.attrib)
                             else:
                                 values += "value: %s <br/>" %(value)
-                # exclude getting CAM default value - it is included in the description text
-##                elif comp != 'CAM':
-##                    for default in defaults:
-##                        for node in default.get_children():
-##                            value_nodes = default.get(node, name)
-##                            if value_nodes is not None and len(value_nodes) > 0:
-##                                for value_node in value_nodes:
-##                                    if value_node.attrib:
-##                                        values += "value is %s for: %s <br/>" %(value_node.text, value_node.attrib)
-##                                    else:
-##                                        values += "value: %s <br/>" %(value_node)
+                # exclude getting CAM and POP default value - it is included in the description text
+                elif comp not in _exclude_defaults_comps:
+                    for default in defaults:
+                        for node in default.get_children(name):
+                            if default.attrib(node):
+                                values += "value is %s for: %s <br/>" %(default.text(node), default.attrib(node))
+                            else:
+                                values += "value: %s <br/>" %(default.text(node))
 
                 # create the node dictionary
-                node_dict = { 'name'        : name,
-                              'desc'        : desc,
-                              'entry_type'  : entry_type,
-                              'valid_values': valid_values,
-                              'value'       : values,
-                              'group_name'  : group_name }
+                node_dict = { 'name'           : name,
+                              'desc'           : desc,
+                              'entry_type'     : entry_type,
+                              'valid_values'   : valid_values,
+                              'default_values' : values,
+                              'group_name'     : group_name }
 
                 # append this node_dict to the group_list
                 group_list.append(node_dict)

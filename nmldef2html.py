@@ -231,16 +231,13 @@ def _main_func(options, work_dir):
                             else:
                                 values += "value: %s <br/>" %(value)
                 # exclude getting CAM default value - it is included in the description text
-##                elif comp != 'CAM':
-##                    for default in defaults:
-##                        for node in default.get_children():
-##                            value_nodes = default.get(node, name)
-##                            if value_nodes is not None and len(value_nodes) > 0:
-##                                for value_node in value_nodes:
-##                                    if value_node.attrib:
-##                                        values += "value is %s for: %s <br/>" %(value_node.text, value_node.attrib)
-##                                    else:
-##                                        values += "value: %s <br/>" %(value_node)
+                elif comp != 'CAM':
+                    for default in defaults:
+                        for node in default.get_children(name=name):
+                            if default.attrib(node):
+                                values += "value is %s for: %s <br/>" %(default.text(node), default.attrib(node))
+                            else:
+                                values += "value: %s <br/>" %(default.text(node))
 
                 # create the node dictionary
                 node_dict = { 'name'        : name,

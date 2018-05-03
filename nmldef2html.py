@@ -20,8 +20,6 @@ sys.path.append(os.path.join(CIMEROOT, "scripts", "Tools"))
 from standard_script_setup import *
 from CIME.utils import expect
 from CIME.XML.generic_xml import GenericXML
-from CIME.XML.namelist_definition import NamelistDefinition
-import xml.etree.ElementTree as ET
 import re
 
 # check for  dependency module
@@ -231,10 +229,11 @@ def _main_func(options, work_dir):
                                 values += "value is %s for: %s <br/>" %(value, value_node.attrib)
                             else:
                                 values += "value: %s <br/>" %(value)
+
                 # exclude getting CAM and POP default value - it is included in the description text
                 elif comp not in _exclude_defaults_comps:
                     for default in defaults:
-                        for node in default.get_children(name):
+                        for node in default.get_children(name=name):
                             if default.attrib(node):
                                 values += "value is %s for: %s <br/>" %(default.text(node), default.attrib(node))
                             else:

@@ -236,6 +236,12 @@ def _main_func(options, work_dir):
                 elif schema == "MARBL JSON":
                     if definition[category][node]['subcategory'] == group_name:
                         entry_type = definition[category][node]['datatype'].encode('utf-8')
+                        # Is this an array?
+                        if "_array_shape" in definition[category][node].keys():
+                            array_len = definition[category][node]["_array_shape"]
+                            if array_len == "_tracer_list":
+                                array_len = "[NUM_TRACERS]"
+                            entry_type = "%s*%s" % (entry_type, array_len)
 
                 # add valid_values
                 if schema == "new":
@@ -278,11 +284,22 @@ def _main_func(options, work_dir):
                     if "default_value" in definition[category][node].keys():
                         if isinstance(definition[category][node]["default_value"], dict):
                             if 'PFT_defaults == "CESM2"' in definition[category][node]["default_value"].keys():
-                                values = definition[category][node]["default_value"]['PFT_defaults == "CESM2"']
+                                default_values = definition[category][node]["default_value"]['PFT_defaults == "CESM2"']
+                            elif 'GCM == "CESM"' in definition[category][node]["default_value"].keys():
+                                default_values = definition[category][node]["default_value"]['GCM == "CESM"']
                             else:
-                                values = definition[category][node]["default_value"]["default"]
+                                default_values = definition[category][node]["default_value"]["default"]
                         else:
-                            values = definition[category][node]["default_value"]
+                            default_values = definition[category][node]["default_value"]
+                        if isinstance(default_values, list):
+                            values = []
+                            for value in default_values:
+                                if type(value) == type (u''):
+                                    values.append(value.encode('utf-8'))
+                                else:
+                                    values.append(value)
+                        elif type(default_values) == type (u''):
+                            values = default_values.encode('utf-8')
                 # exclude getting CAM and POP default value - it is included in the description text
                 elif comp not in _exclude_defaults_comps:
                     for default in defaults:

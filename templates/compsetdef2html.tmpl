@@ -4,7 +4,7 @@
         HREF="http://www.cesm.ucar.edu/styles/modern/img/favicon.png">
   <head>
     <meta charset="utf-8">
-    <title>CESM2 Series Public Release</title>
+    <title>CESM2 Component Sets Definition</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
 
@@ -22,6 +22,8 @@
 
     <style type="text/css">
         #details { background-color: #c5edcb; }
+	#wrapit  { word-wrap: break-word;
+                   white-space: normal; }
     </style>
 
 
@@ -33,13 +35,11 @@
 
     <script>
     $(document).ready( function () {
-	var table = $('#machTable').DataTable( {
+	var table = $('#compsetTable').DataTable( {
 	    "responsive": true,
-	    "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-            "columnDefs": [
-               { "orderData": 5, "targets": 0 },
-            ]
-        } );
+            "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+            "order": [ [ 3, 'desc'], [ 0, 'asc'] ]
+ 	} );
 
 	// Handle click on "Expand All" button
 	$('#btn-show-all-children').on('click', function(){
@@ -88,7 +88,7 @@
                <li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
                 <li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
                 <li><a href="/models/cesm2.0">CESM2 Series Public Release</a><i class="icon-angle-right"></i></li>
-                <li class="active">Machine Definitions</li>
+                <li class="active">Component Set (compset) Definitions</li>
 	      </ul>
 	    </div>
 	  </div>
@@ -100,60 +100,134 @@
 	  <div class="row">
 	    <div class="post-image">
 	      <div class="post-heading">
-		<h2>Machine Definitions</h2>
+		<h2>Component Set (compset) Definitions</h2>
 	      </div>
 	    </div>
 	    <p style="font-size: 0.9em;">
 	      Model Version: {{ model_version }}<br/>
 	      HTML created on: {{ today }}<br/>
-	      Reference: <a href="http://esmci.github.io/cime/users_guide/machine.html">CIME Defining the machine Documentation </a>
+	      Reference: <a href="http://esmci.github.io/cime/users_guide/compsets.html">CIME Model Component Sets Documentation</a>
 	    </p>
-	    <p>
-	      A support level of <b>Scientific</b> indicates that the machine has passed statistical validation and 
-	      CESM regression testing and may be used for large coupled experiments.<br/>
-	      A support level of <b>Tested</b> indicates that the machine has passed funtional CESM regression testing 
-	      but may not necessarily by appropriate for large coupled experiments due to machine
-	      restrictions; for example, limited number of nodes and disk space.
-	    </p>
-
-	    <hr/>
 	    
             <button id="btn-show-all-children" type="button">Expand All</button>
             <button id="btn-hide-all-children" type="button">Collapse All</button>
             <hr/>
-            <table id="machTable" class="display nowrap">
+            <table id="compsetTable" class="display nowrap">
 	      <thead>
 		<tr>
-		  <th>Name</th>
-		  <th>OS</th>
-		  <th>Compilers</th>
-		  <th>pes/node</th>
-		  <th>max_tasks/node</th>
+		  <th>Alias</th>
+		  <th>Long name</th>
+		  <th>Defined By</th>
 		  <th>Support Level</th>
+		  <th class="none">Scientifically Supported Grids</th>
 		  <th class="none">Details</th>
 		</tr>
 	      </thead>
 	      <tbody>
-		{% for name in mach_list|sort %}
+		{% for longname, values in compset_dict.iteritems() %}
 		<tr>
-		  <td>{{ name }}</td>
-		  <td>{{ mach_dict[(name,"os")] }}</td>
-		  <td>{{ mach_dict[(name,"compilers")] }}</td>
-		  <td>{{ mach_dict[(name,"max_tasks_per_node")] }}</td>
-		  <td>{{ mach_dict[(name,"max_mpitasks_per_node")] }}</td>
-		  <td>{{ mach_dict[(name,"support")] }}</td>
-		  <td><pre id="details">{{ mach_dict[(name,"description")] }}</pre></td>
+		  <td>{{ values.alias }}</td>
+		  <td>{{ longname }}</td>
+                  <td>{{ values.defined_by }}</td>
+		  {% if values.science_support_grids|length > 0 %}
+                  <td>Scientific / Tested</td>
+                  {% else %}
+                  <td>Defined</td>
+    		  {% endif %}
+		  <td>
+		    {% if values.science_support_grids|length > 0 %}
+                    <ul>
+                    {% for grid in values.science_support_grids %}
+		    <li id="details" style="width: 20%">{{ grid }}</li>
+		    {% endfor %}
+		    </ul>
+		    {% endif %}
+                  </td>
+		  <td>
+		    <table style="table-layout: fixed; width: 100%">
+		      <thead>
+			<tr id="details">
+			  <th style="width: 20%"></th>
+			  <th style="width: 20%">Value</th>
+			  <th style="width: 60%">Description</th>
+			</tr>
+		      </thead>
+		      <tbody>
+			<tr>
+			  <th id="details">Initialization Time</th>
+			  <td>{{ values.init_opt }}</td>
+			  <td>1850: Pre-Industrial; 2000 present day:<br/>
+			  Additional initialization times defined by components.</td>
+			</tr>
+			<tr>
+			  <th id="details">Atmosphere</th>
+			  <td>{{ values.atm_opt }}</td>
+			  <td id="wrapit">{{ values.ATM_desc }}</td>
+			</tr>
+			<tr>
+			  <th id="details">Land</th>
+			  <td>{{ values.lnd_opt }}</td>
+			  <td id="wrapit">{{ values.LND_desc }}</td>
+			</tr>
+			<tr>
+			  <th id="details">Sea-Ice</th>
+			  <td>{{ values.seaice_opt }}</td>
+			  <td id="wrapit">{{ values.ICE_desc }}</td>
+			</tr>
+			<tr>
+			  <th id="details">Ocean</th>
+			  <td>{{ values.ocn_opt }}</td>
+			  <td id="wrapit">{{ values.OCN_desc }}</td>
+			</tr>
+			<tr>
+			  <th id="details">River runoff</th>
+			  <td>{{ values.rof_opt }}</td>
+			  <td id="wrapit">{{ values.ROF_desc }}</td>
+			</tr>
+			<tr>
+			  <th id="details">Land Ice</th>
+			  <td>{{ values.glc_opt }}</td>
+			  <td id="wrapit">{{ values.GLC_desc }}</td>
+			</tr>
+			<tr>
+			  <th id="details">Wave</th>
+			  <td>{{ values.wav_opt }}</td>
+			  <td id="wrapit">{{ values.WAV_desc }}</td>
+			</tr>
+			{% if values.bgc_opt %}
+			<tr>
+			  <th id="details">Ocean Biogeochemistry</th>
+			  <td>{{ values.bgc_opt }}</td>
+			  {% if "BDRD" in values.bgc_opt %}
+			  <td>BGC CO2=diag, rad CO2=diag:</td>
+			  {% elif "BPRP" in values.bgc_opt %}
+			  <td>BGC CO2=prog, rad CO2=prog:</td>
+			  {% else %}
+			  <td></td>
+			  {% endif %}
+			</tr>
+			{% endif %}
+			{% if values.esp_opt %}
+			<tr>
+			  <th id="details">External System Processing</th>
+			  <td>{{ values.esp_opt }}</td>
+			  <td id="wrapit">{{ values.ESP_desc }}</td>
+			</tr>
+			{% endif %}
+
+		      </tbody>
+		    </table>
+		  </td>
 		</tr>
-		{% endfor %}
+              {% endfor %}
               </tbody>
               <tfoot>
 		<tr>
-		  <th>Name</th>
-		  <th>OS</th>
-		  <th>Compilers</th>
-		  <th>pes/node</th>
-		  <th>max_tasks/node</th>
+		  <th>Alias</th>
+		  <th>Long name</th>
+		  <th>Defined By</th>
 		  <th>Support Level</th>
+		  <th class="none">Scientifically Supported Grids</th>
 		  <th class="none">Details</th>
 		</tr>
 	      </tfoot>

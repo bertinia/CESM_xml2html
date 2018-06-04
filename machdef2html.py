@@ -3,12 +3,6 @@
 """Generator of html file for machines
 """
 
-# Typically ignore this.
-# pylint: disable=invalid-name
-
-# Disable these because this is our standard setup
-# pylint: disable=wildcard-import,unused-wildcard-import,wrong-import-position
-
 import os, sys, re, glob
 import datetime
 
@@ -24,7 +18,6 @@ os.environ['SRCROOT'] = SRCROOT
 
 from standard_script_setup import *
 from CIME.utils import expect
-from CIME.XML.entry_id import GenericXML
 from CIME.XML.files    import Files
 from CIME.XML.machines import Machines
 
@@ -32,7 +25,7 @@ from CIME.XML.machines import Machines
 try:
     import jinja2
 except:
-    raise SystemExit("ERROR: compdef2html.py depends on the jinja2 template module. " /
+    raise SystemExit("ERROR: machdef2html.py depends on the jinja2 template module. " /
                      "Install using 'pip --user install jinja2'")
 
 # global variables
@@ -90,22 +83,24 @@ def _main_func(options, work_dir):
 
     # instantiate a machines object and read XML values into a dictionary
     machines = Machines(config_file, machine="Query")
-    mach_dict = machines.return_all_values()
+    mach_list = machines.list_available_machines()
 
-    # intialize the supported and tested keys
-    for machine in mach_dict.keys():
-        mach_dict[machine]['supported'] = False
-        mach_dict[machine]['tested'] = False
+    # get all the machine values loaded into the mach_dict
+    mach_dict = machines.return_values()
+
+    # intialize the support keys
+    for machine in mach_list:
+        mach_dict[(machine,'support')] = "Unsupported"
 
     # loop through the list of supported machines and flag in the dictionary
     supported = options.supported[0].split(',')
     for machine in supported:
-        mach_dict[machine]['supported'] = True
+        mach_dict[(machine,'support')] = "Scientific"
 
     # loop through the list of tested machines and flag in the dictionary
     tested = options.tested[0].split(',')
     for machine in tested:
-        mach_dict[machine]['tested'] = True
+        mach_dict[(machine,'support')] = "Tested"
 
     # load up jinja template
     templateLoader = jinja2.FileSystemLoader( searchpath='{0}/templates'.format(work_dir) )
@@ -114,7 +109,8 @@ def _main_func(options, work_dir):
     # TODO - get the cesm_version for the CIME root
     tmplFile = 'machdef2html.tmpl'
     template = templateEnv.get_template( tmplFile )
-    templateVars = { 'mach_dict'     : mach_dict,
+    templateVars = { 'mach_list'     : mach_list,
+                     'mach_dict'     : mach_dict,
                      'today'         : _now,
                      'model_version' : model_version }
         
@@ -132,7 +128,8 @@ def _main_func(options, work_dir):
 if __name__ == "__main__":
 
     options = commandline_options()
-    work_dir = os.path.join(CIMEROOT,"scripts","Tools","xml2html")
+##    work_dir = os.path.join(CIMEROOT,"scripts","Tools","xml2html")
+    work_dir = os.getcwd()
     try:
         status = _main_func(options, work_dir)
         sys.exit(status)

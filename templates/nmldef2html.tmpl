@@ -22,6 +22,8 @@
 
     <style type="text/css">
         #description { background-color: #c5edcb; }
+	#wrapit  { word-wrap: break-word;
+                   white-space: normal; }
     </style>
 
 
@@ -85,7 +87,7 @@
                <li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
                 <li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
                 <li><a href="/models/cesm2.0">CESM2 Series Public Release</a><i class="icon-angle-right"></i></li>
-                <li><a href="/models/cesm2.0/component_namelists/index.html">CESM2 Component Namelists</a><i class="icon-angle-right"></i></li>
+                <li><a href="/models/cesm2.0/component_settings/index.html">CESM2 Component Configuration Settings</a><i class="icon-angle-right"></i></li>
                 <li class="active">{{ comp }}{{ compversion }} Fortran Namelist Definitions</li>
 	      </ul>
 	    </div>
@@ -110,39 +112,29 @@
             <button id="btn-show-all-children" type="button">Expand All</button>
             <button id="btn-hide-all-children" type="button">Collapse All</button>
             <hr/>
-            <table id="nmlTable" class="display nowrap">
+            <table id="nmlTable" class="display wrap">
 	      <thead>
 		<tr>
 		  <th>Variable</th>
 		  <th>Namelist Group</th>
 		  <th>Category</th>
 		  <th>Entry Type</th>
-		  {% if comp == "CAM" or comp == "POP2" %}
 		  <th class="none">Valid Values</th>
-		  <th class="none">Description and Default Value</th>
-		  {% else %}
-		  <th class="none">Valid Values</th>
-		  <th class="none">Default Value</th>
-		  <th class="none">Description</th>
-		  {% endif %}
+		  <th class="none">Possible Default Values</th>
+		  <th class="none">Description and out-of-the-box Default</th>
 		</tr>
 	      </thead>
 	      <tbody>
 		{% for category, var_list in html_dict|dictsort %}
 		{% for var in var_list|sort(attribute='name') %}
 		<tr>
-		  <td>{{ var['name'] }}</td>
+		  <td>{{ var['name']|replace("___","&"|e) }}</td>
 		  <td>{{ var['group_name'] }}</td>
-		  <td>{{ category|e }}</td>
+		  <td>{{ category|replace("___","&"|e) }}</td>
 		  <td>{{ var['entry_type'] }}</td>
-		  {% if comp == "CAM" or comp == "POP2" %}
-		  <td>{{ var['valid_values'] }}</td>
-		  <td><pre id="description">{{ var['desc'] }}</pre></td>
-		  {% else %}
 		  <td>{{ var['valid_values'] }}</td>
 		  <td>{{ var['default_values'] }}</td>
 		  <td><pre id="description">{{ var['desc'] }}</pre></td>
-		  {% endif %}
 		</tr>
 		{% endfor %}
 		{% endfor %}
@@ -153,14 +145,9 @@
 		  <th>Namelist Group</th>
 		  <th>Category</th>
 		  <th>Entry Type</th>
-		  {% if comp == "CAM" or comp == "POP2"%}
 		  <th class="none">Valid Values</th>
-		  <th class="none">Description and Default Value</th>
-		  {% else %}
-		  <th class="none">Valid Values</th>
-		  <th class="none">Default Value</th>
-		  <th class="none">Description</th>
-		  {% endif %}
+		  <th class="none">Possible Default Values</th>
+		  <th class="none">Description and out-of-the-box Default</th>
 		</tr>
 	      </tfoot>
 	    </table>

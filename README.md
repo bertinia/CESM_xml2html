@@ -49,12 +49,13 @@ Steps to generate compsets html
 ***************************************************
 Steps to generate the grids html
 
-1. run cime/scripts/query_config --grids --long > rids.txt
+1. run cime/scripts/query_config --grids --long > grids.txt
 2. edit the grids.txt to remove all lines up to the first line containing 'alias:'
-2. griddef2html.py --txtfile grids.txt --htmlfile grids.html --version CESM2.0
+2. run griddef2html.py --txtfile /fully-qualified-path-to/grids.txt --htmlfile /fully-qualified-path-to/grids.html --version CESM2.0
 
 ***************************************************
 
 Steps to generate the machines html
 
-  >machdef2html.py --htmlfile machines.html --version CESM2.0 --supported yellowstone,cheyenne --tested edison,hobart,cori-knl,cori-haswell,yellowstone,cheyenne
+run machdef2html.py --htmlfile /fully-qualified-path-to/machines.html --version CESM2.0 --supported cheyenne,hobart --tested cori,edison,stampede,bluewaters,theta
+

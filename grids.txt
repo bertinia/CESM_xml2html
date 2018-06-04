@@ -9,8 +9,8 @@
        non-default grids are: atm:gx1v7  lnd:gx1v7  ocnice:gx1v7  
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: 1D_1D (only for compsets that are DATM.+DROF )
        non-default grids are: atm:01col  lnd:01col  
@@ -61,12 +61,6 @@
        1x1 Vancouver Canada -- only valid for DATM/CLM compset with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.clm/domain.lnd.1x1pt-vancouverCAN_navy.090715.nc (only for grid match: atm|lnd) 
 
-     alias: 1x1_tropicAtl (only for compsets that are DATM.+CLM )
-       non-default grids are: atm:1x1_tropicAtl  lnd:1x1_tropicAtl  rof:null  
-    
-       1x1 Tropical Atlantic Test Case -- only valid for DATM/CLM compset with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.clm/domain.lnd.1x1pt-tropicAtl_test.111004.nc (only for grid match: atm|lnd) 
-
      alias: 1x1_urbanc_alpha (only for compsets that are DATM.+CLM )
        non-default grids are: atm:1x1_urbanc_alpha  lnd:1x1_urbanc_alpha  rof:null  
     
@@ -109,19 +103,6 @@
        $DIN_LOC_ROOT/share/domains/domain.lnd.T31_gx3v7.090928.nc (only for grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.ocn.48x96_gx3v7_100114.nc (only for grid match: ocnice) 
 
-     alias: T31_g37_gl10 (only for compsets that are _CISM )
-       non-default grids are: atm:T31  lnd:T31  ocnice:gx3v7  glc:gland10  
-       mask is: gx3v7
-    
-       10-km Greenland grid with domain file(s):  
-    
-       gx3v7 is displaced Greenland pole v7 3-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx3v7.120323.nc (only for grid match: ocnice) 
-    
-       T31 is Gaussian grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.T31_gx3v7.090928.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.48x96_gx3v7_100114.nc (only for grid match: ocnice) 
-
      alias: T31_g37_gl20 (only for compsets that are _CISM )
        non-default grids are: atm:T31  lnd:T31  ocnice:gx3v7  glc:gland20  
        mask is: gx3v7
@@ -148,15 +129,63 @@
        $DIN_LOC_ROOT/share/domains/domain.lnd.T31_gx3v7.090928.nc (only for grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.ocn.48x96_gx3v7_100114.nc (only for grid match: ocnice) 
 
-     alias: T42_T42 (only for compsets that are not _POP )
+     alias: T42_T42_musgs (only for compsets that are not _POP )
        non-default grids are: atm:T42  lnd:T42  ocnice:T42  
        mask is: usgs
     
        T42 is Gaussian grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.clm/domain.lnd.T42_USGS.111004.nc (only for mask: usgs grid match: atm|lnd)
-       $DIN_LOC_ROOT/atm/cam/ocnfrac/domain.camocn.64x128_USGS_070807.nc (only for mask: usgs grid match: ocnice) 
+       $DIN_LOC_ROOT/atm/cam/ocnfrac/domain.camocn.64x128_USGS_070807.nc (only for mask: usgs grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T42_gx1v7.170629.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.T42_gx1v7.170629.nc (only for mask: gx1v7 grid match: ocnice) 
 
-     alias: T85_T85 (only for compsets that are not _POP )
+     alias: T42_T42 (only for compsets that are not _POP )
+       non-default grids are: atm:T42  lnd:T42  ocnice:T42  
+       mask is: gx1v7
+    
+       T42 is Gaussian grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.clm/domain.lnd.T42_USGS.111004.nc (only for mask: usgs grid match: atm|lnd)
+       $DIN_LOC_ROOT/atm/cam/ocnfrac/domain.camocn.64x128_USGS_070807.nc (only for mask: usgs grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T42_gx1v7.170629.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.T42_gx1v7.170629.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: T42_T42_mg16 (only for compsets that are not _POP )
+       non-default grids are: atm:T42  lnd:T42  ocnice:T42  
+       mask is: gx1v6
+    
+       T42 is Gaussian grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.clm/domain.lnd.T42_USGS.111004.nc (only for mask: usgs grid match: atm|lnd)
+       $DIN_LOC_ROOT/atm/cam/ocnfrac/domain.camocn.64x128_USGS_070807.nc (only for mask: usgs grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T42_gx1v7.170629.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.T42_gx1v7.170629.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: T42_T42_mg17 (only for compsets that are not _POP )
+       non-default grids are: atm:T42  lnd:T42  ocnice:T42  
+       mask is: gx1v7
+    
+       T42 is Gaussian grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.clm/domain.lnd.T42_USGS.111004.nc (only for mask: usgs grid match: atm|lnd)
+       $DIN_LOC_ROOT/atm/cam/ocnfrac/domain.camocn.64x128_USGS_070807.nc (only for mask: usgs grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T42_gx1v7.170629.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.T42_gx1v7.170629.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: T85_T85_mg16 (only for compsets that are not _POP )
+       non-default grids are: atm:T85  lnd:T85  ocnice:T85  
+       mask is: gx1v6
+    
+       T85 is Gaussian grid: with domain file(s): 
+       domain.lnd.T85_gx1v4.060403.nc (only for grid match: atm|lnd)
+       domain.lnd.T85_gx1v4.060403.nc (only for grid match: ocnice) 
+
+     alias: T85_T85_mg17 (only for compsets that are not _POP )
+       non-default grids are: atm:T85  lnd:T85  ocnice:T85  
+       mask is: gx1v7
+    
+       T85 is Gaussian grid: with domain file(s): 
+       domain.lnd.T85_gx1v4.060403.nc (only for grid match: atm|lnd)
+       domain.lnd.T85_gx1v4.060403.nc (only for grid match: ocnice) 
+
+     alias: T85_T85_musgs (only for compsets that are not _POP )
        non-default grids are: atm:T85  lnd:T85  ocnice:T85  
        mask is: usgs
     
@@ -181,7 +210,7 @@
        /glade/u/home/benedict/ys/datain/domain.aqua.fv0.9x1.25.nc (only for mask: null grid match: ocnice) 
     
        tx0.1v2 is tripole v2 1/10-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_090218.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_161014.nc (only for grid match: ocnice) 
 
      alias: T341_f02_t12
        non-default grids are: atm:T341  lnd:0.23x0.31  ocnice:tx0.1v2  
@@ -192,7 +221,7 @@
        domain.ocn.0.23x0.31_gx1v6_101108.nc (only for mask: gx1v6 grid match: ocnice) 
     
        tx0.1v2 is tripole v2 1/10-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_090218.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_161014.nc (only for grid match: ocnice) 
     
        T341 is Gaussian grid: with domain file(s): 
        domain.lnd.T341_gx1v6.111226.nc (only for mask: gx1v6 grid match: atm|lnd) 
@@ -210,6 +239,7 @@
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_gx3v7.090911.nc (only for mask: gx3v7 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx1v1.090122.nc (only for mask: tx1v1 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v2_090623.nc (only for mask: tx0.1v2 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v3.170929.nc (only for mask: tx0.1v3 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_oQU120.160325.nc (only for mask: oQU120 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v6.130409.nc (only for mask: gx1v6 grid match: ocnice)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v7.151008.nc (only for mask: gx1v7 grid match: ocnice)
@@ -228,6 +258,7 @@
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_gx3v7.090911.nc (only for mask: gx3v7 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx1v1.090122.nc (only for mask: tx1v1 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v2_090623.nc (only for mask: tx0.1v2 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v3.170929.nc (only for mask: tx0.1v3 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_oQU120.160325.nc (only for mask: oQU120 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v6.130409.nc (only for mask: gx1v6 grid match: ocnice)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v7.151008.nc (only for mask: gx1v7 grid match: ocnice)
@@ -238,7 +269,7 @@
        mask is: tx0.1v2
     
        tx0.1v2 is tripole v2 1/10-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_090218.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_161014.nc (only for grid match: ocnice) 
     
        T62 is Gaussian grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_gx1v7.151008.nc (only for mask: gx1v7 grid match: atm|lnd)
@@ -246,10 +277,80 @@
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_gx3v7.090911.nc (only for mask: gx3v7 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx1v1.090122.nc (only for mask: tx1v1 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v2_090623.nc (only for mask: tx0.1v2 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v3.170929.nc (only for mask: tx0.1v3 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_oQU120.160325.nc (only for mask: oQU120 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v6.130409.nc (only for mask: gx1v6 grid match: ocnice)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v7.151008.nc (only for mask: gx1v7 grid match: ocnice)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx3v7.130409.nc (only for mask: gx3v7 grid match: ocnice) 
+
+     alias: T62_t13 (only for compsets that are not _CAM )
+       non-default grids are: atm:T62  lnd:T62  ocnice:tx0.1v3  
+       mask is: tx0.1v3
+    
+       tx0.1v3 is tripole v3 1/10-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v3.170730.nc (only for grid match: ocnice) 
+    
+       T62 is Gaussian grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_gx1v7.151008.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_gx1v6.090320.nc (only for mask: gx1v6 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_gx3v7.090911.nc (only for mask: gx3v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx1v1.090122.nc (only for mask: tx1v1 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v2_090623.nc (only for mask: tx0.1v2 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v3.170929.nc (only for mask: tx0.1v3 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_oQU120.160325.nc (only for mask: oQU120 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v6.130409.nc (only for mask: gx1v6 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v7.151008.nc (only for mask: gx1v7 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx3v7.130409.nc (only for mask: gx3v7 grid match: ocnice) 
+
+     alias: TL319_g17 (only for compsets that are not _CAM )
+       non-default grids are: atm:TL319  lnd:TL319  ocnice:gx1v7  rof:JRA025  
+       mask is: gx1v7
+    
+       TL319 grid for JRA55 with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.TL319_gx1v7.170705.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.TL319_gx1v7.170705.nc (only for mask: gx1v7 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.TL319_tx0.1v2.161014.nc (only for mask: tx0.1v2 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2.161014.nc (only for mask: tx0.1v2 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.TL319_tx0.1v3.170730.nc (only for mask: tx0.1v3 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v3.170730.nc (only for mask: tx0.1v3 grid match: ocnice) 
+    
+       JRA 0.25 degree runoff grid for use with JRA-55 runoff data with domain file(s):  
+    
+       gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
+
+     alias: TL319_t12 (only for compsets that are not _CAM )
+       non-default grids are: atm:TL319  lnd:TL319  ocnice:tx0.1v2  rof:JRA025  
+    
+       tx0.1v2 is tripole v2 1/10-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_161014.nc (only for grid match: ocnice) 
+    
+       TL319 grid for JRA55 with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.TL319_gx1v7.170705.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.TL319_gx1v7.170705.nc (only for mask: gx1v7 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.TL319_tx0.1v2.161014.nc (only for mask: tx0.1v2 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2.161014.nc (only for mask: tx0.1v2 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.TL319_tx0.1v3.170730.nc (only for mask: tx0.1v3 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v3.170730.nc (only for mask: tx0.1v3 grid match: ocnice) 
+    
+       JRA 0.25 degree runoff grid for use with JRA-55 runoff data with domain file(s):  
+
+     alias: TL319_t13 (only for compsets that are not _CAM )
+       non-default grids are: atm:TL319  lnd:TL319  ocnice:tx0.1v3  rof:JRA025  
+    
+       TL319 grid for JRA55 with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.TL319_gx1v7.170705.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.TL319_gx1v7.170705.nc (only for mask: gx1v7 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.TL319_tx0.1v2.161014.nc (only for mask: tx0.1v2 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2.161014.nc (only for mask: tx0.1v2 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.TL319_tx0.1v3.170730.nc (only for mask: tx0.1v3 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v3.170730.nc (only for mask: tx0.1v3 grid match: ocnice) 
+    
+       tx0.1v3 is tripole v3 1/10-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v3.170730.nc (only for grid match: ocnice) 
+    
+       JRA 0.25 degree runoff grid for use with JRA-55 runoff data with domain file(s):  
 
      alias: T62_g16 (only for compsets that are not _CAM )
        non-default grids are: atm:T62  lnd:T62  ocnice:gx1v6  
@@ -265,6 +366,7 @@
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_gx3v7.090911.nc (only for mask: gx3v7 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx1v1.090122.nc (only for mask: tx1v1 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v2_090623.nc (only for mask: tx0.1v2 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v3.170929.nc (only for mask: tx0.1v3 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_oQU120.160325.nc (only for mask: oQU120 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v6.130409.nc (only for mask: gx1v6 grid match: ocnice)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v7.151008.nc (only for mask: gx1v7 grid match: ocnice)
@@ -275,8 +377,8 @@
        mask is: gx1v7
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
     
        T62 is Gaussian grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_gx1v7.151008.nc (only for mask: gx1v7 grid match: atm|lnd)
@@ -284,6 +386,7 @@
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_gx3v7.090911.nc (only for mask: gx3v7 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx1v1.090122.nc (only for mask: tx1v1 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v2_090623.nc (only for mask: tx0.1v2 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v3.170929.nc (only for mask: tx0.1v3 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_oQU120.160325.nc (only for mask: oQU120 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v6.130409.nc (only for mask: gx1v6 grid match: ocnice)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v7.151008.nc (only for mask: gx1v7 grid match: ocnice)
@@ -302,6 +405,7 @@
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_gx3v7.090911.nc (only for mask: gx3v7 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx1v1.090122.nc (only for mask: tx1v1 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v2_090623.nc (only for mask: tx0.1v2 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.T62_tx0.1v3.170929.nc (only for mask: tx0.1v3 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.lnd.T62_oQU120.160325.nc (only for mask: oQU120 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v6.130409.nc (only for mask: gx1v6 grid match: ocnice)
        $DIN_LOC_ROOT/share/domains/domain.ocn.T62_gx1v7.151008.nc (only for mask: gx1v7 grid match: ocnice)
@@ -328,8 +432,8 @@
        domain.ocn.0.23x0.31_gx1v6_101108.nc (only for mask: gx1v6 grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: f02_t12
        non-default grids are: atm:0.23x0.31  lnd:0.23x0.31  ocnice:tx0.1v2  
@@ -340,7 +444,7 @@
        domain.ocn.0.23x0.31_gx1v6_101108.nc (only for mask: gx1v6 grid match: ocnice) 
     
        tx0.1v2 is tripole v2 1/10-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_090218.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_161014.nc (only for grid match: ocnice) 
 
      alias: f05_g16
        non-default grids are: atm:0.47x0.63  lnd:0.47x0.63  ocnice:gx1v6  
@@ -363,15 +467,15 @@
        domain.ocn.0.47x0.63_gx1v6_090408.nc (only for mask: gx1v6 grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: f05_t12
        non-default grids are: atm:0.47x0.63  lnd:0.47x0.63  ocnice:tx0.1v2  
        mask is: tx0.1v2
     
        tx0.1v2 is tripole v2 1/10-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_090218.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_161014.nc (only for grid match: ocnice) 
     
        0.47x0.63 is FV 1/2-deg grid: with domain file(s): 
        domain.lnd.fv0.47x0.63_gx1v6.090407.nc (only for mask: gx1v6 grid match: atm|lnd)
@@ -406,8 +510,8 @@
        /glade/u/home/benedict/ys/datain/domain.aqua.fv0.9x1.25.nc (only for mask: null grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: f09_g16_gl4 (only for compsets that are _CISM )
        non-default grids are: atm:0.9x1.25  lnd:0.9x1.25  ocnice:gx1v6  glc:gland4  
@@ -442,44 +546,8 @@
        4-km Greenland grid, for use with the glissade dycore with domain file(s):  
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
-
-     alias: f09_g16_gl10 (only for compsets that are _CISM )
-       non-default grids are: atm:0.9x1.25  lnd:0.9x1.25  ocnice:gx1v6  glc:gland10  
-       mask is: gx1v6
-    
-       10-km Greenland grid with domain file(s):  
-    
-       0.9x1.25 is FV 1-deg grid: with domain file(s): 
-       domain.lnd.fv0.9x1.25_gx1v6.090309.nc (only for mask: gx1v6 grid match: atm|lnd)
-       domain.ocn.0.9x1.25_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
-       domain.lnd.fv0.9x1.25_gx1v7.151020.nc (only for mask: gx1v7 grid match: atm|lnd)
-       domain.ocn.fv0.9x1.25_gx1v7.151020.nc (only for mask: gx1v7 grid match: ocnice)
-       /glade/u/home/benedict/ys/datain/domain.aqua.fv0.9x1.25.nc (only for mask: null grid match: atm|lnd)
-       /glade/u/home/benedict/ys/datain/domain.aqua.fv0.9x1.25.nc (only for mask: null grid match: ocnice) 
-    
-       gx1v6 is displaced Greenland pole v6 1-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v6.090206.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v6.090206.nc (only for grid match: ocnice) 
-
-     alias: f09_g17_gl10 (only for compsets that are _CISM )
-       non-default grids are: atm:0.9x1.25  lnd:0.9x1.25  ocnice:gx1v7  glc:gland10  
-       mask is: gx1v7
-    
-       10-km Greenland grid with domain file(s):  
-    
-       0.9x1.25 is FV 1-deg grid: with domain file(s): 
-       domain.lnd.fv0.9x1.25_gx1v6.090309.nc (only for mask: gx1v6 grid match: atm|lnd)
-       domain.ocn.0.9x1.25_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
-       domain.lnd.fv0.9x1.25_gx1v7.151020.nc (only for mask: gx1v7 grid match: atm|lnd)
-       domain.ocn.fv0.9x1.25_gx1v7.151020.nc (only for mask: gx1v7 grid match: ocnice)
-       /glade/u/home/benedict/ys/datain/domain.aqua.fv0.9x1.25.nc (only for mask: null grid match: atm|lnd)
-       /glade/u/home/benedict/ys/datain/domain.aqua.fv0.9x1.25.nc (only for mask: null grid match: ocnice) 
-    
-       gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: f09_g16_gl20 (only for compsets that are _CISM )
        non-default grids are: atm:0.9x1.25  lnd:0.9x1.25  ocnice:gx1v6  glc:gland20  
@@ -514,8 +582,8 @@
        20-km Greenland grid with domain file(s):  
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: f09_g16_gl5 (only for compsets that are _CISM )
        non-default grids are: atm:0.9x1.25  lnd:0.9x1.25  ocnice:gx1v6  glc:gland5UM  
@@ -548,22 +616,10 @@
        /glade/u/home/benedict/ys/datain/domain.aqua.fv0.9x1.25.nc (only for mask: null grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
     
        5-km Greenland grid (new version from U. Montana) with domain file(s):  
-
-     alias: f09_f09 (only for compsets that are not _POP )
-       non-default grids are: atm:0.9x1.25  lnd:0.9x1.25  ocnice:0.9x1.25  
-       mask is: gx1v6
-    
-       0.9x1.25 is FV 1-deg grid: with domain file(s): 
-       domain.lnd.fv0.9x1.25_gx1v6.090309.nc (only for mask: gx1v6 grid match: atm|lnd)
-       domain.ocn.0.9x1.25_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
-       domain.lnd.fv0.9x1.25_gx1v7.151020.nc (only for mask: gx1v7 grid match: atm|lnd)
-       domain.ocn.fv0.9x1.25_gx1v7.151020.nc (only for mask: gx1v7 grid match: ocnice)
-       /glade/u/home/benedict/ys/datain/domain.aqua.fv0.9x1.25.nc (only for mask: null grid match: atm|lnd)
-       /glade/u/home/benedict/ys/datain/domain.aqua.fv0.9x1.25.nc (only for mask: null grid match: ocnice) 
 
      alias: f09_f09_mnull (only for compsets that are _DOCN%SAQUAP|DOCN%DAQUAP )
        non-default grids are: atm:0.9x1.25  lnd:0.9x1.25  ocnice:0.9x1.25  
@@ -650,6 +706,8 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        gx1v6 is displaced Greenland pole v6 1-deg grid: with domain file(s): 
@@ -663,11 +721,13 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: f19_g16_r01
        non-default grids are: atm:1.9x2.5  lnd:1.9x2.5  ocnice:gx1v6  rof:r01  
@@ -678,6 +738,8 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        gx1v6 is displaced Greenland pole v6 1-deg grid: with domain file(s): 
@@ -693,11 +755,13 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: f19_g16_gl4 (only for compsets that are _CISM )
        non-default grids are: atm:1.9x2.5  lnd:1.9x2.5  ocnice:gx1v6  glc:gland4  
@@ -706,6 +770,8 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        4-km Greenland grid, for use with the glissade dycore with domain file(s):  
@@ -721,13 +787,15 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        4-km Greenland grid, for use with the glissade dycore with domain file(s):  
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: f19_g16_gl5 (only for compsets that are _CISM )
        non-default grids are: atm:1.9x2.5  lnd:1.9x2.5  ocnice:gx1v6  glc:gland5UM  
@@ -738,6 +806,8 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        gx1v6 is displaced Greenland pole v6 1-deg grid: with domain file(s): 
@@ -751,11 +821,13 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
     
        5-km Greenland grid (new version from U. Montana) with domain file(s):  
 
@@ -766,6 +838,8 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        5-km Greenland grid (new version from U. Montana) with domain file(s):  
@@ -777,6 +851,8 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        5-km Greenland grid (new version from U. Montana) with domain file(s):  
@@ -788,18 +864,11 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        5-km Greenland grid (new version from U. Montana) with domain file(s):  
-
-     alias: f19_f19 (only for compsets that are not _POP )
-       non-default grids are: atm:1.9x2.5  lnd:1.9x2.5  ocnice:1.9x2.5  
-       mask is: gx1v6
-    
-       1.9x2.5 is FV 2-deg grid: with domain file(s): 
-       domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
-       domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
-       domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
 
      alias: f19_f19_mg16 (only for compsets that are not _POP )
        non-default grids are: atm:1.9x2.5  lnd:1.9x2.5  ocnice:1.9x2.5  
@@ -808,6 +877,19 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
+       domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
+
+     alias: f19_f19 (only for compsets that are not _POP )
+       non-default grids are: atm:1.9x2.5  lnd:1.9x2.5  ocnice:1.9x2.5  
+       mask is: gx1v6
+    
+       1.9x2.5 is FV 2-deg grid: with domain file(s): 
+       domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
+       domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
 
      alias: f19_f19_mnull (only for compsets that are _DOCN%SAQUAP|DOCN%DAQUAP )
@@ -817,6 +899,8 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
 
      alias: f19_f19_mg17 (only for compsets that are not _POP )
@@ -826,39 +910,8 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
-       domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
-
-     alias: f19_f19_gl10 (only for compsets that are _CISM only for compsets that are not _POP )
-       non-default grids are: atm:1.9x2.5  lnd:1.9x2.5  ocnice:1.9x2.5  glc:gland10  
-       mask is: gx1v6
-    
-       10-km Greenland grid with domain file(s):  
-    
-       1.9x2.5 is FV 2-deg grid: with domain file(s): 
-       domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
-       domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
-       domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
-
-     alias: f19_f19_gl10_mg16 (only for compsets that are _CISM only for compsets that are not _POP )
-       non-default grids are: atm:1.9x2.5  lnd:1.9x2.5  ocnice:1.9x2.5  glc:gland10  
-       mask is: gx1v6
-    
-       10-km Greenland grid with domain file(s):  
-    
-       1.9x2.5 is FV 2-deg grid: with domain file(s): 
-       domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
-       domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
-       domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
-
-     alias: f19_f19_gl10_mg17 (only for compsets that are _CISM only for compsets that are not _POP )
-       non-default grids are: atm:1.9x2.5  lnd:1.9x2.5  ocnice:1.9x2.5  glc:gland10  
-       mask is: gx1v7
-    
-       10-km Greenland grid with domain file(s):  
-    
-       1.9x2.5 is FV 2-deg grid: with domain file(s): 
-       domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
-       domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
 
      alias: f45_g37
@@ -871,14 +924,6 @@
     
        gx3v7 is displaced Greenland pole v7 3-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.ocn.gx3v7.120323.nc (only for grid match: ocnice) 
-
-     alias: f02_f02 (only for compsets that are not _POP )
-       non-default grids are: atm:0.23x0.31  lnd:0.23x0.31  ocnice:0.23x0.31  
-       mask is: gx1v6
-    
-       0.23x0.31 is FV 1/4-deg grid: with domain file(s): 
-       domain.lnd.fv0.23x0.31_gx1v6.100517.nc (only for mask: gx1v6 grid match: atm|lnd)
-       domain.ocn.0.23x0.31_gx1v6_101108.nc (only for mask: gx1v6 grid match: ocnice) 
 
      alias: f02_f02_mg16 (only for compsets that are not _POP )
        non-default grids are: atm:0.23x0.31  lnd:0.23x0.31  ocnice:0.23x0.31  
@@ -896,14 +941,6 @@
        domain.lnd.fv0.23x0.31_gx1v6.100517.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.0.23x0.31_gx1v6_101108.nc (only for mask: gx1v6 grid match: ocnice) 
 
-     alias: f25_f25 (only for compsets that are not _POP )
-       non-default grids are: atm:2.5x3.33  lnd:2.5x3.33  ocnice:2.5x3.33  
-       mask is: gx1v6
-    
-       2.5x3.33 is FV 3-deg grid: with domain file(s): 
-       domain.lnd.fv2.5x3.33_gx3v7.110223.nc (only for grid match: atm|lnd)
-       domain.ocn.fv2.5x3.33_gx3v7_110223.nc (only for grid match: ocnice) 
-
      alias: f25_f25_mg16 (only for compsets that are not _POP )
        non-default grids are: atm:2.5x3.33  lnd:2.5x3.33  ocnice:2.5x3.33  
        mask is: gx1v6
@@ -920,7 +957,7 @@
        domain.lnd.fv2.5x3.33_gx3v7.110223.nc (only for grid match: atm|lnd)
        domain.ocn.fv2.5x3.33_gx3v7_110223.nc (only for grid match: ocnice) 
 
-     alias: f45_f45 (only for compsets that are not _POP )
+     alias: f45_f45_mg37 (only for compsets that are not _POP )
        non-default grids are: atm:4x5  lnd:4x5  ocnice:4x5  
        mask is: gx3v7
     
@@ -928,24 +965,66 @@
        domain.lnd.fv4x5_gx3v7.091218.nc (only for grid match: atm|lnd)
        domain.ocn.4x5_gx3v7_100120.nc (only for grid match: ocnice) 
 
-     alias: f10_f10 (only for compsets that are not _POP )
+     alias: f10_f10_mg37 (only for compsets that are not _POP )
+       non-default grids are: atm:10x15  lnd:10x15  ocnice:10x15  
+       mask is: gx3v7
+    
+       10x15 is FV 10-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.clm/domain.lnd.fv10x15_USGS.110713.nc (only for mask: usgs grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.clm/domain.ocn.fv10x15_USGS_070807.nc (only for mask: usgs grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.fv10x15_gx3v7.180321.nc (only for mask: gx3v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.fv10x15_gx3v7.180321.nc (only for mask: gx3v7 grid match: ocnice) 
+
+     alias: f10_f10_musgs (only for compsets that are not _POP )
        non-default grids are: atm:10x15  lnd:10x15  ocnice:10x15  
        mask is: usgs
     
        10x15 is FV 10-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.clm/domain.lnd.fv10x15_USGS.110713.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.clm/domain.camocn.10x15_USGS_070807.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.clm/domain.lnd.fv10x15_USGS.110713.nc (only for mask: usgs grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.clm/domain.ocn.fv10x15_USGS_070807.nc (only for mask: usgs grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.fv10x15_gx3v7.180321.nc (only for mask: gx3v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.fv10x15_gx3v7.180321.nc (only for mask: gx3v7 grid match: ocnice) 
 
-     alias: ne16_g37
-       non-default grids are: atm:ne16np4  lnd:ne16np4  ocnice:gx3v7  
-       mask is: gx3v6
-    
-       ne16np4 is Spectral Elem 2-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne16np4_gx3v7.120406.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne16np4_gx3v7.121113.nc (only for grid match: ocnice) 
+     alias: f10_g37
+       non-default grids are: atm:10x15  lnd:10x15  ocnice:gx3v7  
+       mask is: gx3v7
     
        gx3v7 is displaced Greenland pole v7 3-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.ocn.gx3v7.120323.nc (only for grid match: ocnice) 
+    
+       10x15 is FV 10-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.clm/domain.lnd.fv10x15_USGS.110713.nc (only for mask: usgs grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.clm/domain.ocn.fv10x15_USGS_070807.nc (only for mask: usgs grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.fv10x15_gx3v7.180321.nc (only for mask: gx3v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.fv10x15_gx3v7.180321.nc (only for mask: gx3v7 grid match: ocnice) 
+
+     alias: ne5_ne5_mg37 (only for compsets that are not _POP )
+       non-default grids are: atm:ne5np4  lnd:ne5np4  ocnice:ne5np4  
+       mask is: gx3v7
+    
+       ne5np4 is Spectral Elem 6-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne5np4_gx3v7.140810.nc (only for mask: gx3v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne5np4_gx3v7.140810.nc (only for mask: gx3v7 grid match: ocnice) 
+
+     alias: ne16_g17
+       non-default grids are: atm:ne16np4  lnd:ne16np4  ocnice:gx1v7  
+       mask is: gx1v7
+    
+       ne16np4 is Spectral Elem 2-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne16np4_gx1v7.171018.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne16np4_gx1v7.171018.nc (only for mask: gx1v7 grid match: ocnice) 
+    
+       gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
+
+     alias: ne16_ne16_mg17 (only for compsets that are not _POP )
+       non-default grids are: atm:ne16np4  lnd:ne16np4  ocnice:ne16np4  
+       mask is: gx1v7
+    
+       ne16np4 is Spectral Elem 2-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne16np4_gx1v7.171018.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne16np4_gx1v7.171018.nc (only for mask: gx1v7 grid match: ocnice) 
 
      alias: ne30_g16
        non-default grids are: atm:ne30np4  lnd:ne30np4  ocnice:gx1v6  
@@ -953,7 +1032,9 @@
     
        ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: ocnice) 
     
        gx1v6 is displaced Greenland pole v6 1-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v6.090206.nc (only for grid match: atm|lnd)
@@ -965,11 +1046,13 @@
     
        ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: ne30_f19_g16
        non-default grids are: atm:ne30np4  lnd:1.9x2.5  ocnice:gx1v6  
@@ -977,11 +1060,15 @@
     
        ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: ocnice) 
     
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        gx1v6 is displaced Greenland pole v6 1-deg grid: with domain file(s): 
@@ -994,16 +1081,20 @@
     
        ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: ocnice) 
     
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: ne30_f09_g16
        non-default grids are: atm:ne30np4  lnd:0.9x1.25  ocnice:gx1v6  
@@ -1011,7 +1102,9 @@
     
        ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: ocnice) 
     
        0.9x1.25 is FV 1-deg grid: with domain file(s): 
        domain.lnd.fv0.9x1.25_gx1v6.090309.nc (only for mask: gx1v6 grid match: atm|lnd)
@@ -1031,11 +1124,13 @@
     
        ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
     
        0.9x1.25 is FV 1-deg grid: with domain file(s): 
        domain.lnd.fv0.9x1.25_gx1v6.090309.nc (only for mask: gx1v6 grid match: atm|lnd)
@@ -1044,6 +1139,26 @@
        domain.ocn.fv0.9x1.25_gx1v7.151020.nc (only for mask: gx1v7 grid match: ocnice)
        /glade/u/home/benedict/ys/datain/domain.aqua.fv0.9x1.25.nc (only for mask: null grid match: atm|lnd)
        /glade/u/home/benedict/ys/datain/domain.aqua.fv0.9x1.25.nc (only for mask: null grid match: ocnice) 
+
+     alias: ne30_ne30_mg16 (only for compsets that are not _POP )
+       non-default grids are: atm:ne30np4  lnd:ne30np4  ocnice:ne30np4  
+       mask is: gx1v6
+    
+       ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne30_ne30_mg17 (only for compsets that are not _POP )
+       non-default grids are: atm:ne30np4  lnd:ne30np4  ocnice:ne30np4  
+       mask is: gx1v7
+    
+       ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: ocnice) 
 
      alias: ne60_g16
        non-default grids are: atm:ne60np4  lnd:ne60np4  ocnice:gx1v6  
@@ -1062,8 +1177,16 @@
        mask is: gx1v7
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
+    
+       ne60np4 is Spectral Elem 1/2-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne60np4_gx1v6.120406.nc (only for mask: gx1v6 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne60np4_gx1v6.121113.nc (only for mask: gx1v6 grid match: ocnice) 
+
+     alias: ne60_ne60_mg16 (only for compsets that are not _POP )
+       non-default grids are: atm:ne60np4  lnd:ne60np4  ocnice:ne60np4  
+       mask is: gx1v6
     
        ne60np4 is Spectral Elem 1/2-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.ne60np4_gx1v6.120406.nc (only for mask: gx1v6 grid match: atm|lnd)
@@ -1090,15 +1213,23 @@
        $DIN_LOC_ROOT/share/domains/domain.ocn.ne120np4_gx1v6.121113.nc (only for mask: gx1v6 grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: ne120_t12
        non-default grids are: atm:ne120np4  lnd:ne120np4  ocnice:tx0.1v2  
        mask is: tx0.1v2
     
        tx0.1v2 is tripole v2 1/10-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_090218.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_161014.nc (only for grid match: ocnice) 
+    
+       ne120np4 is Spectral Elem 1/4-deg grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne120np4_gx1v6.110502.nc (only for mask: gx1v6 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne120np4_gx1v6.121113.nc (only for mask: gx1v6 grid match: ocnice) 
+
+     alias: ne120_ne120_mg16 (only for compsets that are not _POP )
+       non-default grids are: atm:ne120np4  lnd:ne120np4  ocnice:ne120np4  
+       mask is: gx1v6
     
        ne120np4 is Spectral Elem 1/4-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.ne120np4_gx1v6.110502.nc (only for mask: gx1v6 grid match: atm|lnd)
@@ -1133,8 +1264,8 @@
        $DIN_LOC_ROOT/share/domains/domain.ocn.ne240np4_gx1v6.111226.nc (only for mask: gx1v6 grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: ne240_t12
        non-default grids are: atm:ne240np4  lnd:ne240np4  ocnice:tx0.1v2  
@@ -1145,95 +1276,7 @@
        $DIN_LOC_ROOT/share/domains/domain.ocn.ne240np4_gx1v6.111226.nc (only for mask: gx1v6 grid match: ocnice) 
     
        tx0.1v2 is tripole v2 1/10-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_090218.nc (only for grid match: ocnice) 
-
-     alias: ne16_ne16 (only for compsets that are not _POP )
-       non-default grids are: atm:ne16np4  lnd:ne16np4  ocnice:ne16np4  
-       mask is: gx3v7
-    
-       ne16np4 is Spectral Elem 2-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne16np4_gx3v7.120406.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne16np4_gx3v7.121113.nc (only for grid match: ocnice) 
-
-     alias: ne30_ne30 (only for compsets that are not _POP )
-       non-default grids are: atm:ne30np4  lnd:ne30np4  ocnice:ne30np4  
-       mask is: gx1v6
-    
-       ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice) 
-
-     alias: ne30_ne30_mg16 (only for compsets that are not _POP )
-       non-default grids are: atm:ne30np4  lnd:ne30np4  ocnice:ne30np4  
-       mask is: gx1v6
-    
-       ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice) 
-
-     alias: ne30_ne30_mg17 (only for compsets that are not _POP )
-       non-default grids are: atm:ne30np4  lnd:ne30np4  ocnice:ne30np4  
-       mask is: gx1v7
-    
-       ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice) 
-
-     alias: ne60_ne60 (only for compsets that are not _POP )
-       non-default grids are: atm:ne60np4  lnd:ne60np4  ocnice:ne60np4  
-       mask is: gx1v6
-    
-       ne60np4 is Spectral Elem 1/2-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne60np4_gx1v6.120406.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne60np4_gx1v6.121113.nc (only for mask: gx1v6 grid match: ocnice) 
-
-     alias: ne60_ne60_mg16 (only for compsets that are not _POP )
-       non-default grids are: atm:ne60np4  lnd:ne60np4  ocnice:ne60np4  
-       mask is: gx1v6
-    
-       ne60np4 is Spectral Elem 1/2-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne60np4_gx1v6.120406.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne60np4_gx1v6.121113.nc (only for mask: gx1v6 grid match: ocnice) 
-
-     alias: ne60_ne60_mg17 (only for compsets that are not _POP )
-       non-default grids are: atm:ne60np4  lnd:ne60np4  ocnice:ne60np4  
-       mask is: gx1v7
-    
-       ne60np4 is Spectral Elem 1/2-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne60np4_gx1v6.120406.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne60np4_gx1v6.121113.nc (only for mask: gx1v6 grid match: ocnice) 
-
-     alias: ne120_ne120 (only for compsets that are not _POP )
-       non-default grids are: atm:ne120np4  lnd:ne120np4  ocnice:ne120np4  
-       mask is: gx1v6
-    
-       ne120np4 is Spectral Elem 1/4-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne120np4_gx1v6.110502.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne120np4_gx1v6.121113.nc (only for mask: gx1v6 grid match: ocnice) 
-
-     alias: ne120_ne120_mg16 (only for compsets that are not _POP )
-       non-default grids are: atm:ne120np4  lnd:ne120np4  ocnice:ne120np4  
-       mask is: gx1v6
-    
-       ne120np4 is Spectral Elem 1/4-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne120np4_gx1v6.110502.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne120np4_gx1v6.121113.nc (only for mask: gx1v6 grid match: ocnice) 
-
-     alias: ne120_ne120_mg17 (only for compsets that are not _POP )
-       non-default grids are: atm:ne120np4  lnd:ne120np4  ocnice:ne120np4  
-       mask is: gx1v7
-    
-       ne120np4 is Spectral Elem 1/4-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne120np4_gx1v6.110502.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne120np4_gx1v6.121113.nc (only for mask: gx1v6 grid match: ocnice) 
-
-     alias: ne240_ne240 (only for compsets that are not _POP )
-       non-default grids are: atm:ne240np4  lnd:ne240np4  ocnice:ne240np4  
-       mask is: gx1v6
-    
-       ne240np4 is Spectral Elem 1/8-deg grid: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.lnd.ne240np4_gx1v6.111226.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne240np4_gx1v6.111226.nc (only for mask: gx1v6 grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.tx0.1v2_161014.nc (only for grid match: ocnice) 
 
      alias: ne240_ne240_mg16 (only for compsets that are not _POP )
        non-default grids are: atm:ne240np4  lnd:ne240np4  ocnice:ne240np4  
@@ -1250,6 +1293,122 @@
        ne240np4 is Spectral Elem 1/8-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.ne240np4_gx1v6.111226.nc (only for mask: gx1v6 grid match: atm|lnd)
        $DIN_LOC_ROOT/share/domains/domain.ocn.ne240np4_gx1v6.111226.nc (only for mask: gx1v6 grid match: ocnice) 
+
+     alias: ne30pg2_ne30pg2_mg17 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne30np4.pg2  lnd:ne30np4.pg2  ocnice:ne30np4.pg2  
+       mask is: gx1v7
+    
+       ne30np4.pg2 is a Spectral Elem 1-deg grid with a 2x2 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4.pg2_gx1v7.170628.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4.pg2_gx1v7.170628.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne60pg2_ne60pg2_mg17 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne60np4.pg2  lnd:ne60np4.pg2  ocnice:ne60np4.pg2  
+       mask is: gx1v7
+    
+       ne60np4.pg2 is a Spectral Elem 0.5-deg grid with a 2x2 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne60np4.pg2_gx1v7.170628.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne60np4.pg2_gx1v7.170628.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne120pg2_ne120pg2_mg17 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne120np4.pg2  lnd:ne120np4.pg2  ocnice:ne120np4.pg2  
+       mask is: gx1v7
+    
+       ne120np4.pg2 is a Spectral Elem 0.25-deg grid with a 2x2 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne120np4.pg2_gx1v7.170629.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne120np4.pg2_gx1v7.170629.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne240pg2_ne240pg2_mg17 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne240np4.pg2  lnd:ne240np4.pg2  ocnice:ne240np4.pg2  
+       mask is: gx1v7
+    
+       ne240np4.pg2 is a Spectral Elem 0.125-deg grid with a 2x2 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne240np4.pg2_gx1v7.170629.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne240np4.pg2_gx1v7.170629.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne5pg3_ne5pg3_mg37 (only for compsets that are not _POP )
+       non-default grids are: atm:ne5np4.pg3  lnd:ne5np4.pg3  ocnice:ne5np4.pg3  
+       mask is: gx3v7
+    
+       ne5np4 is Spectral Elem 6-deg grid with a 3x3 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne5np4.pg3_gx3v7.170605.nc (only for mask: gx3v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne5np4.pg3_gx3v7.170605.nc (only for mask: gx3v7 grid match: ocnice) 
+
+     alias: ne16pg3_ne16pg3_mg37 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne16np4.pg3  lnd:ne16np4.pg3  ocnice:ne16np4.pg3  
+       mask is: gx3v7
+    
+       ne16np4.pg3 is a Spectral Elem 2-deg grid with a 3x3 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne16pg3_gx1v7.171003.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne16pg3_gx1v7.171003.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne30pg3_ne30pg3_mg17 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne30np4.pg3  lnd:ne30np4.pg3  ocnice:ne30np4.pg3  
+       mask is: gx1v7
+    
+       ne30np4.pg3 is a Spectral Elem 1-deg grid with a 3x3 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4.pg3_gx1v7.170605.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4.pg3_gx1v7_170605.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne60pg3_ne60pg3_mg17 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne60np4.pg3  lnd:ne60np4.pg3  ocnice:ne60np4.pg3  
+       mask is: gx1v7
+    
+       ne60np4.pg3 is a Spectral Elem 0.5-deg grid with a 3x3 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne60np4.pg3_gx1v7.170628.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne60np4.pg3_gx1v7.170628.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne120pg3_ne120pg3_mg17 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne120np4.pg3  lnd:ne120np4.pg3  ocnice:ne120np4.pg3  
+       mask is: gx1v7
+    
+       ne120np4.pg3 is a Spectral Elem 0.25-deg grid with a 3x3 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne120np4.pg3_gx1v7.170629.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne120np4.pg3_gx1v7.170629.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne240pg3_ne240pg3_mg17 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne240np4.pg3  lnd:ne240np4.pg3  ocnice:ne240np4.pg3  
+       mask is: gx1v7
+    
+       ne240np4.pg3 is a Spectral Elem 0.125-deg grid with a 3x3 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne240np4.pg3_gx1v7.170629.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne240np4.pg3_gx1v7.170629.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne30pg4_ne30pg4_mg17 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne30np4.pg4  lnd:ne30np4.pg4  ocnice:ne30np4.pg4  
+       mask is: gx1v7
+    
+       ne30np4.pg4 is a Spectral Elem 1-deg grid with a 4x4 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4.pg4_gx1v7.170628.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4.pg4_gx1v7.170628.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne60pg4_ne60pg4_mg17 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne60np4.pg4  lnd:ne60np4.pg4  ocnice:ne60np4.pg4  
+       mask is: gx1v7
+    
+       ne60np4.pg4 is a Spectral Elem 0.5-deg grid with a 4x4 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne60np4.pg4_gx1v7.170628.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne60np4.pg4_gx1v7.170628.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne120pg4_ne120pg4_mg17 (only for compsets that are not _POP|_CLM )
+       non-default grids are: atm:ne120np4.pg4  lnd:ne120np4.pg4  ocnice:ne120np4.pg4  
+       mask is: gx1v7
+    
+       ne120np4.pg4 is a Spectral Elem 0.25-deg grid with a 4x4 FVM physics grid: with domain file(s): 
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne120np4.pg4_gx1v7.170629.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne120np4.pg4_gx1v7.170629.nc (only for mask: gx1v7 grid match: ocnice) 
+
+     alias: ne0TESTONLYne5x4_ne0TESTONLYne5x4_mg37 (only for compsets that are not _POP )
+       non-default grids are: atm:ne0np4TESTONLY.ne5x4  lnd:ne0np4TESTONLY.ne5x4  ocnice:ne0np4TESTONLY.ne5x4  
+       mask is: gx3v7
+    
+       ne0np4TESTONLY.ne5x4 is a low-resolution refined SE grid for testing: with domain file(s):  
+
+     alias: ne0CONUSne30x8_ne0CONUSne30x8_mt12 (only for compsets that are not _POP )
+       non-default grids are: atm:ne0np4CONUS.ne30x8  lnd:ne0np4CONUS.ne30x8  ocnice:ne0np4CONUS.ne30x8  
+       mask is: tx0.1v2
+    
+       ne0np4CONUS.ne30x8 is a Spectral Elem 1-deg grid with a 1/8 deg refined region over the continental United States: with domain file(s):  
 
      alias: T31_g37_rx1 (only for compsets that are _DROF )
        non-default grids are: atm:T31  lnd:T31  ocnice:gx3v7  
@@ -1280,6 +1439,8 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        gx1v6 is displaced Greenland pole v6 1-deg grid: with domain file(s): 
@@ -1293,11 +1454,13 @@
        1.9x2.5 is FV 2-deg grid: with domain file(s): 
        domain.lnd.fv1.9x2.5_gx1v6.090206.nc (only for mask: gx1v6 grid match: atm|lnd)
        domain.ocn.1.9x2.5_gx1v6_090403.nc (only for mask: gx1v6 grid match: ocnice)
+       domain.lnd.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: atm|lnd)
+       domain.ocn.fv1.9x2.5_gx1v7.170518.nc (only for mask: gx1v7 grid match: ocnice)
        domain.aqua.fv1.9x2.5.nc (only for mask: null grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: ne30_g16_rx1 (only for compsets that are _DROF )
        non-default grids are: atm:ne30np4  lnd:ne30np4  ocnice:gx1v6  
@@ -1305,7 +1468,9 @@
     
        ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: ocnice) 
     
        gx1v6 is displaced Greenland pole v6 1-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v6.090206.nc (only for grid match: atm|lnd)
@@ -1317,11 +1482,13 @@
     
        ne30np4 is Spectral Elem 1-deg grid: with domain file(s): 
        $DIN_LOC_ROOT/share/domains/domain.lnd.ne30np4_gx1v6.110905.nc (only for mask: gx1v6 grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30np4_gx1v6_110217.nc (only for mask: gx1v6 grid match: ocnice)
+       $DIN_LOC_ROOT/share/domains/domain.lnd.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.ne30_gx1v7.171003.nc (only for mask: gx1v7 grid match: ocnice) 
     
        gx1v7 is displaced Greenland pole 1-deg grid with Caspian as a land feature: with domain file(s): 
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: atm|lnd)
-       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151020.nc (only for grid match: ocnice) 
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: atm|lnd)
+       $DIN_LOC_ROOT/share/domains/domain.ocn.gx1v7.151008.nc (only for grid match: ocnice) 
 
      alias: ww3a (only for compsets that are _WW3|DWAV )
        non-default grids are: wav:ww3a  

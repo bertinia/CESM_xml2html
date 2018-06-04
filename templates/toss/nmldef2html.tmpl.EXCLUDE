@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
 
     <style type="text/css">
-        #details { background-color: #c5edcb; }
+        #description { background-color: #c5edcb; }
     </style>
 
 
@@ -33,13 +33,10 @@
 
     <script>
     $(document).ready( function () {
-	var table = $('#machTable').DataTable( {
+	var table = $('#nmlTable').DataTable( {
 	    "responsive": true,
-	    "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-            "columnDefs": [
-               { "orderData": 5, "targets": 0 },
-            ]
-        } );
+	    "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]	    
+	} );
 
 	// Handle click on "Expand All" button
 	$('#btn-show-all-children').on('click', function(){
@@ -88,7 +85,8 @@
                <li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
                 <li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
                 <li><a href="/models/cesm2.0">CESM2 Series Public Release</a><i class="icon-angle-right"></i></li>
-                <li class="active">Machine Definitions</li>
+                <li><a href="/models/cesm2.0/component_namelists/index.html">CESM2 Component Namelists</a><i class="icon-angle-right"></i></li>
+                <li class="active">{{ comp }}{{ compversion }} Fortran Namelist Definitions</li>
 	      </ul>
 	    </div>
 	  </div>
@@ -100,61 +98,69 @@
 	  <div class="row">
 	    <div class="post-image">
 	      <div class="post-heading">
-		<h2>Machine Definitions</h2>
+		<h2>{{ comp }}{{ compversion }} Fortran Namelist Definitions</h2>
 	      </div>
 	    </div>
-	    <p style="font-size: 0.9em;">
-	      Model Version: {{ model_version }}<br/>
-	      HTML created on: {{ today }}<br/>
-	      Reference: <a href="http://esmci.github.io/cime/users_guide/machine.html">CIME Defining the machine Documentation </a>
-	    </p>
-	    <p>
-	      A support level of <b>Scientific</b> indicates that the machine has passed statistical validation and 
-	      CESM regression testing and may be used for large coupled experiments.<br/>
-	      A support level of <b>Tested</b> indicates that the machine has passed funtional CESM regression testing 
-	      but may not necessarily by appropriate for large coupled experiments due to machine
-	      restrictions; for example, limited number of nodes and disk space.
-	    </p>
+              
+            <!--  ---------------------------------------------------------------------  -->
+            <h4 class="separator"> Component tag: {{ comptag }}</h4>
+	    <h5>HTML created on: {{ today }}</h5>
+            <!--  ---------------------------------------------------------------------  -->
 
-	    <hr/>
-	    
             <button id="btn-show-all-children" type="button">Expand All</button>
             <button id="btn-hide-all-children" type="button">Collapse All</button>
             <hr/>
-            <table id="machTable" class="display nowrap">
+            <table id="nmlTable" class="display nowrap">
 	      <thead>
 		<tr>
-		  <th>Name</th>
-		  <th>OS</th>
-		  <th>Compilers</th>
-		  <th>pes/node</th>
-		  <th>max_tasks/node</th>
-		  <th>Support Level</th>
-		  <th class="none">Details</th>
+		  <th>Variable</th>
+		  <th>Namelist Group</th>
+		  <th>Category</th>
+		  <th>Entry Type</th>
+		  {% if comp == "CAM" or comp == "POP2" %}
+		  <th class="none">Valid Values</th>
+		  <th class="none">Description and Default Value</th>
+		  {% else %}
+		  <th class="none">Valid Values</th>
+		  <th class="none">Default Value</th>
+		  <th class="none">Description</th>
+		  {% endif %}
 		</tr>
 	      </thead>
 	      <tbody>
-		{% for name in mach_list|sort %}
+		{% for category, var_list in html_dict|dictsort %}
+		{% for var in var_list|sort(attribute='name') %}
 		<tr>
-		  <td>{{ name }}</td>
-		  <td>{{ mach_dict[(name,"os")] }}</td>
-		  <td>{{ mach_dict[(name,"compilers")] }}</td>
-		  <td>{{ mach_dict[(name,"max_tasks_per_node")] }}</td>
-		  <td>{{ mach_dict[(name,"max_mpitasks_per_node")] }}</td>
-		  <td>{{ mach_dict[(name,"support")] }}</td>
-		  <td><pre id="details">{{ mach_dict[(name,"description")] }}</pre></td>
+		  <td>{{ var['name'] }}</td>
+		  <td>{{ var['group_name'] }}</td>
+		  <td>{{ category|e }}</td>
+		  <td>{{ var['entry_type'] }}</td>
+		  {% if comp == "CAM" or comp == "POP2" %}
+		  <td>{{ var['valid_values'] }}</td>
+		  <td><pre id="description">{{ var['desc'] }}</pre></td>
+		  {% else %}
+		  <td>{{ var['valid_values'] }}</td>
+		  <td>{{ var['default_values'] }}</td>
+		  <td><pre id="description">{{ var['desc'] }}</pre></td>
+		  {% endif %}
 		</tr>
+		{% endfor %}
 		{% endfor %}
               </tbody>
               <tfoot>
 		<tr>
-		  <th>Name</th>
-		  <th>OS</th>
-		  <th>Compilers</th>
-		  <th>pes/node</th>
-		  <th>max_tasks/node</th>
-		  <th>Support Level</th>
-		  <th class="none">Details</th>
+		  <th>Variable</th>
+		  <th>Namelist Group</th>
+		  <th>Category</th>
+		  <th>Entry Type</th>
+		  {% if comp == "CAM" or comp == "POP2"%}
+		  <th class="none">Valid Values</th>
+		  <th class="none">Description and Default Value</th>
+		  {% else %}
+		  <th class="none">Valid Values</th>
+		  <th class="none">Default Value</th>
+		  <th class="none">Description</th>
+		  {% endif %}
 		</tr>
 	      </tfoot>
 	    </table>

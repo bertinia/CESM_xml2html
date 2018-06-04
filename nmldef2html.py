@@ -34,7 +34,7 @@ _now = datetime.datetime.now().strftime('%Y-%m-%d')
 _comps = ['AQUAP', 'CAM', 'CLM', 'CISM', 'POP2', 'CICE', 'RTM', 'MOSART', 'WW3', 
           'Driver', 'DATM', 'DESP', 'DICE', 'DLND', 'DOCN', 'DROF', 'DWAV']
 _cime_comps = ['Driver', 'DATM', 'DESP', 'DICE', 'DLND', 'DOCN', 'DROF', 'DWAV']
-_exclude_defaults_comps = ['CAM','POP','CISM']
+_exclude_defaults_comps = ['POP2']
 _exclude_groups = {
     'AQUAP': [],
     'CAM': ['cime_driver_inst','seq_cplflds_inparm','seq_cplflds_userspec',
@@ -100,6 +100,13 @@ def _main_func(options, work_dir):
 
     """Construct a `NamelistDefinition` from an XML file."""
 
+    # Initialize variables for the html template
+    html_dict = dict()
+    cesm_version = 'CESM2'
+    comp = ''
+    if options.comp:
+        comp = options.comp[0]
+
     # Create a definition object from the xml file
     filename = options.nmlfile[0]
     expect(os.path.isfile(filename), "File %s does not exist"%filename)
@@ -114,23 +121,16 @@ def _main_func(options, work_dir):
     defaults = []
     if len(default_files) > 0:
         schema = "old"
-        for default_file in default_files:
-            default = GenericXML(infile=default_file)
-            default.read(infile=default_file, schema=schema)
-            defaults.append(default)
+        if comp not in _exclude_defaults_comps:
+            for default_file in default_files:
+                default = GenericXML(infile=default_file)
+                default.read(infile=default_file, schema=schema)
+                defaults.append(default)
     else:
         schema = "new"
 
     # read the file into the definition object
     definition.read(infile=filename, schema=schema)
-
-    # Initialize variables for the html template
-    html_dict = dict()
-    cesm_version = 'CESM2'
-    comp = ''
-    if options.comp:
-        comp = options.comp[0]
-
     # get the component tag from the command line args
     comptag = ''
     if options.comptag:
@@ -148,6 +148,7 @@ def _main_func(options, work_dir):
             category = definition.get_element_text("category", root=node)
         else:
             category = definition.get(node, "category")
+
         if category in category_dict:
             category_dict[category].append(node)
         else:
@@ -226,18 +227,18 @@ def _main_func(options, work_dir):
                             except:
                                 value = 'undefined'
                             if value_node.attrib:
-                                values += "value is %s for: %s <br/>" %(value, value_node.attrib)
+                                values += " is %s for: %s <br/>" %(value, value_node.attrib)
                             else:
-                                values += "value: %s <br/>" %(value)
+                                values += " %s <br/>" %(value)
 
                 # exclude getting CAM and POP default value - it is included in the description text
                 elif comp not in _exclude_defaults_comps:
                     for default in defaults:
                         for node in default.get_children(name=name):
                             if default.attrib(node):
-                                values += "value is %s for: %s <br/>" %(default.text(node), default.attrib(node))
+                                values += " is %s for: %s <br/>" %(default.text(node), default.attrib(node))
                             else:
-                                values += "value: %s <br/>" %(default.text(node))
+                                values += " %s <br/>" %(default.text(node))
 
                 # create the node dictionary
                 node_dict = { 'name'           : name,

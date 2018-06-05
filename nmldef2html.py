@@ -138,8 +138,10 @@ def _main_func(options, work_dir):
     else:
         schema = "MARBL JSON"
         derived_desc = dict()
+        derived_entry_root = dict()
         derived_entry_type = dict()
         derived_category = dict()
+        derived_default_value = dict()
 
         import json
         with open(filename) as settings_file:
@@ -211,7 +213,17 @@ def _main_func(options, work_dir):
                                 if group not in _exclude_groups[comp]:
                                     marbl_varname = "%s%%%s" % (root_varname, component)
                                     derived_desc[marbl_varname] = MARBL_json_dict[real_category][root_varname]["datatype"][component]["longname"]
-                                    derived_entry_type[marbl_varname] = "dtype%%%s" % MARBL_json_dict[real_category][root_varname]["datatype"][component]["datatype"]
+                                    if root_varname == "autotrophs":
+                                        derived_entry_root[marbl_varname] = "dtype(%d)" % MARBL_default_settings.settings_dict['autotroph_cnt']
+                                    elif root_varname == "zooplankton":
+                                        derived_entry_root[marbl_varname] = "dtype(%d)" % MARBL_default_settings.settings_dict['zooplankton_cnt']
+                                    elif root_varname == "grazing":
+                                        derived_entry_root[marbl_varname] = "dtype(%d,%d)" % \
+                                                 (MARBL_default_settings.settings_dict['autotroph_cnt'] ,
+                                                  MARBL_default_settings.settings_dict['zooplankton_cnt'])
+                                    else:
+                                        sys.exit("Error: unknown derived type root '%s'" % root_varname)
+                                    derived_entry_type[marbl_varname] = MARBL_json_dict[real_category][root_varname]["datatype"][component]["datatype"].encode('utf-8')
                                     derived_category[marbl_varname] = real_category
                                     if group in groups_dict:
                                         groups_dict[group].append(marbl_varname)
@@ -279,7 +291,7 @@ def _main_func(options, work_dir):
                     entry_type = definition.get(node, "type")
                 elif schema == "MARBL JSON":
                     if category == "MARBL_derived_types":
-                        entry_type = derived_entry_type[node]
+                        entry_type = "%s%%%s" % (derived_entry_root[node], derived_entry_type[node])
                     else:
                         if MARBL_json_dict[category][node]['subcategory'] == group_name:
                             entry_type = MARBL_json_dict[category][node]['datatype'].encode('utf-8')
@@ -309,7 +321,10 @@ def _main_func(options, work_dir):
                     valid_values = ".true.,.false."
                 else:
                     if not valid_values:
-                        valid_values = "any " + entry_type
+                        if category == "MARBL_derived_types":
+                            valid_values = "any " + derived_entry_type[node]
+                        else:
+                            valid_values = "any " + entry_type
                         if "char" in valid_values:
                             valid_values = "any char"
 
@@ -336,7 +351,7 @@ def _main_func(options, work_dir):
 #                        print "%s = %s" % (node, values)
                     else:
                         if category == "MARBL_derived_types":
-                            pass
+                            derived_default_value[node] = []
                         else:
                             if "default_value" in MARBL_json_dict[category][node].keys():
                                 if isinstance(MARBL_json_dict[category][node]["default_value"], dict):

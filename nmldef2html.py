@@ -224,6 +224,10 @@ def _main_func(options, work_dir):
                                     else:
                                         sys.exit("Error: unknown derived type root '%s'" % root_varname)
                                     derived_entry_type[marbl_varname] = MARBL_json_dict[real_category][root_varname]["datatype"][component]["datatype"].encode('utf-8')
+                                    if "_array_shape" in MARBL_json_dict[real_category][root_varname]["datatype"][component].keys():
+                                        derived_entry_type[marbl_varname] = derived_entry_type[marbl_varname] + "(%d)" % \
+                                                MARBL_get_array_len(MARBL_json_dict[real_category][root_varname]["datatype"][component]["_array_shape"],
+                                                                    MARBL_default_settings)
                                     derived_category[marbl_varname] = real_category
                                     if group in groups_dict:
                                         groups_dict[group].append(marbl_varname)
@@ -297,10 +301,9 @@ def _main_func(options, work_dir):
                             entry_type = MARBL_json_dict[category][node]['datatype'].encode('utf-8')
                             # Is this an array?
                             if "_array_shape" in MARBL_json_dict[category][node].keys():
-                                array_len = MARBL_json_dict[category][node]["_array_shape"]
-                                if array_len == "_tracer_list":
-                                    array_len = MARBL_default_settings.get_tracer_cnt()
-                                entry_type = "%s*%d" % (entry_type, array_len)
+                                entry_type = entry_type + "(%d)" % \
+                                        MARBL_get_array_len(MARBL_json_dict[category][node]["_array_shape"],
+                                                            MARBL_default_settings)
 
                 # add valid_values
                 if schema == "new":
@@ -427,6 +430,17 @@ def _main_func(options, work_dir):
         html.write(nml_tmpl)
 
     return 0
+
+###############################################################################
+def MARBL_get_array_len(array_len, MARBL_settings):
+###############################################################################
+    if isinstance(array_len,int):
+        return array_len
+    if array_len == "_tracer_list":
+        return MARBL_settings.get_tracer_cnt()
+    if array_len in MARBL_settings.settings_dict.keys():
+            return MARBL_settings.settings_dict[array_len]
+    sys.exit("ERROR: %s is unknown array length" % array_len)
 
 ###############################################################################
 

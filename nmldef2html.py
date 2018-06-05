@@ -137,6 +137,9 @@ def _main_func(options, work_dir):
         definition.read(infile=filename, schema=schema)
     else:
         schema = "MARBL JSON"
+        derived_desc = dict()
+        derived_entry_type = dict()
+        derived_category = dict()
 
         import json
         with open(filename) as settings_file:
@@ -166,12 +169,21 @@ def _main_func(options, work_dir):
     # Create a dictionary with a category key and a list of all entry nodes for each key
     category_dict = dict()
     if schema == "MARBL JSON":
+        # Special category for MARBL derived types
+        category_dict["MARBL_derived_types"] = dict()
         for category in [key for key in MARBL_json_dict.keys() if key[0] != "_"]:
-            for marbl_varname in [key for key in MARBL_json_dict[category].keys() if not isinstance(MARBL_json_dict[category][key]['datatype'], dict)]:
-                if category in category_dict:
-                    category_dict[category].append(marbl_varname)
+            for marbl_varname in MARBL_json_dict[category].keys():
+                if isinstance(MARBL_json_dict[category][marbl_varname]['datatype'], dict):
+                    if marbl_varname not in category_dict["MARBL_derived_types"].keys():
+                        category_dict["MARBL_derived_types"][marbl_varname] = dict()
+                        category_dict["MARBL_derived_types"][marbl_varname][category] = []
+                    for component in [key for key in MARBL_json_dict[category][marbl_varname]["datatype"] if key[0] != "_"]:
+                        category_dict["MARBL_derived_types"][marbl_varname][category].append(component)
                 else:
-                    category_dict[category] = [ marbl_varname ]
+                    if category in category_dict.keys():
+                        category_dict[category].append(marbl_varname)
+                    else:
+                        category_dict[category] = [ marbl_varname ]
     else:
         for node in definition.get_children("entry"):
             if schema == "new":
@@ -190,14 +202,30 @@ def _main_func(options, work_dir):
         # Create a dictionary of groups with a group key and an array of group nodes for each key
         groups_dict = dict()
         if schema == "MARBL JSON":
-            for marbl_varname in category_dict[category]:
-                if 'subcategory' in MARBL_json_dict[category][marbl_varname].keys():
-                        group = MARBL_json_dict[category][marbl_varname]['subcategory']
-                        if group not in _exclude_groups[comp]:
-                            if group in groups_dict:
-                                groups_dict[group].append(marbl_varname)
-                            else:
-                                groups_dict[group] = [ marbl_varname ]
+            if category == "MARBL_derived_types":
+                for root_varname in category_dict[category].keys():
+                    for real_category in category_dict[category][root_varname].keys():
+                        for component in category_dict[category][root_varname][real_category]:
+                            if "subcategory" in MARBL_json_dict[real_category][root_varname]["datatype"][component].keys():
+                                group = MARBL_json_dict[real_category][root_varname]["datatype"][component]["subcategory"]
+                                if group not in _exclude_groups[comp]:
+                                    marbl_varname = "%s%%%s" % (root_varname, component)
+                                    derived_desc[marbl_varname] = MARBL_json_dict[real_category][root_varname]["datatype"][component]["longname"]
+                                    derived_entry_type[marbl_varname] = "dtype%%%s" % MARBL_json_dict[real_category][root_varname]["datatype"][component]["datatype"]
+                                    derived_category[marbl_varname] = real_category
+                                    if group in groups_dict:
+                                        groups_dict[group].append(marbl_varname)
+                                    else:
+                                        groups_dict[group] = [ marbl_varname ]
+            else:
+                for marbl_varname in category_dict[category]:
+                    if 'subcategory' in MARBL_json_dict[category][marbl_varname].keys():
+                            group = MARBL_json_dict[category][marbl_varname]['subcategory']
+                            if group not in _exclude_groups[comp]:
+                                if group in groups_dict:
+                                    groups_dict[group].append(marbl_varname)
+                                else:
+                                    groups_dict[group] = [ marbl_varname ]
         else:
             for node in category_dict[category]:
                 if schema == "new":
@@ -223,6 +251,7 @@ def _main_func(options, work_dir):
                 # the @ and including the @ should be removed
                 if schema == "MARBL JSON":
                     name = node
+                    #print name
                 else:
                     name = definition.get(node, "id")
                 if "@" in name:
@@ -230,8 +259,11 @@ def _main_func(options, work_dir):
 
                 # Create the information for this node - start with the description
                 if schema == "MARBL JSON":
-                    if MARBL_json_dict[category][node]['subcategory'] == group_name:
-                        desc = MARBL_json_dict[category][node]['longname']
+                    if category == "MARBL_derived_types":
+                        desc = derived_desc[node]
+                    else:
+                        if MARBL_json_dict[category][node]['subcategory'] == group_name:
+                            desc = MARBL_json_dict[category][node]['longname']
                 else:
                     if schema == "new":
                         raw_desc = definition.get_element_text("desc", root=node)
@@ -246,14 +278,17 @@ def _main_func(options, work_dir):
                 elif schema == "old":
                     entry_type = definition.get(node, "type")
                 elif schema == "MARBL JSON":
-                    if MARBL_json_dict[category][node]['subcategory'] == group_name:
-                        entry_type = MARBL_json_dict[category][node]['datatype'].encode('utf-8')
-                        # Is this an array?
-                        if "_array_shape" in MARBL_json_dict[category][node].keys():
-                            array_len = MARBL_json_dict[category][node]["_array_shape"]
-                            if array_len == "_tracer_list":
-                                array_len = MARBL_default_settings.get_tracer_cnt()
-                            entry_type = "%s*%d" % (entry_type, array_len)
+                    if category == "MARBL_derived_types":
+                        entry_type = derived_entry_type[node]
+                    else:
+                        if MARBL_json_dict[category][node]['subcategory'] == group_name:
+                            entry_type = MARBL_json_dict[category][node]['datatype'].encode('utf-8')
+                            # Is this an array?
+                            if "_array_shape" in MARBL_json_dict[category][node].keys():
+                                array_len = MARBL_json_dict[category][node]["_array_shape"]
+                                if array_len == "_tracer_list":
+                                    array_len = MARBL_default_settings.get_tracer_cnt()
+                                entry_type = "%s*%d" % (entry_type, array_len)
 
                 # add valid_values
                 if schema == "new":
@@ -261,11 +296,14 @@ def _main_func(options, work_dir):
                 elif schema == "old":
                     valid_values = definition.get(node, "valid_values")
                 if schema == "MARBL JSON":
-                    if MARBL_json_dict[category][node]["subcategory"] == group_name:
-                        if "valid_values" in MARBL_json_dict[category][node].keys():
-                            valid_values = ",".join(MARBL_json_dict[category][node]["valid_values"]).encode('utf-8')
-                        else:
-                            valid_values = None
+                    if category == "MARBL_derived_types":
+                        valid_values = ''
+                    else:
+                        if MARBL_json_dict[category][node]["subcategory"] == group_name:
+                            if "valid_values" in MARBL_json_dict[category][node].keys():
+                                valid_values = ",".join(MARBL_json_dict[category][node]["valid_values"]).encode('utf-8')
+                            else:
+                                valid_values = None
 
                 if entry_type == "logical":
                     valid_values = ".true.,.false."
@@ -295,27 +333,31 @@ def _main_func(options, work_dir):
                 elif schema == "MARBL JSON":
                     if node in MARBL_default_settings.settings_dict.keys():
                         values = MARBL_default_settings.settings_dict[node]
-                        print "%s = %s" % (node, values)
+#                        print "%s = %s" % (node, values)
                     else:
-                        if "default_value" in MARBL_json_dict[category][node].keys():
-                            if isinstance(MARBL_json_dict[category][node]["default_value"], dict):
-                                if 'PFT_defaults == "CESM2"' in MARBL_json_dict[category][node]["default_value"].keys():
-                                    default_values = MARBL_json_dict[category][node]["default_value"]['PFT_defaults == "CESM2"']
-                                elif 'GCM == "CESM"' in MARBL_json_dict[category][node]["default_value"].keys():
-                                    default_values = MARBL_json_dict[category][node]["default_value"]['GCM == "CESM"']
-                                else:
-                                    default_values = MARBL_json_dict[category][node]["default_value"]["default"]
-                            else:
-                                default_values = MARBL_json_dict[category][node]["default_value"]
-                            if isinstance(default_values, list):
-                                values = []
-                                for value in default_values:
-                                    if type(value) == type (u''):
-                                        values.append(value.encode('utf-8'))
+                        if category == "MARBL_derived_types":
+                            pass
+                        else:
+                            if "default_value" in MARBL_json_dict[category][node].keys():
+                                if isinstance(MARBL_json_dict[category][node]["default_value"], dict):
+                                    if 'PFT_defaults == "CESM2"' in MARBL_json_dict[category][node]["default_value"].keys():
+                                        default_values = MARBL_json_dict[category][node]["default_value"]['PFT_defaults == "CESM2"']
+                                    elif 'GCM == "CESM"' in MARBL_json_dict[category][node]["default_value"].keys():
+                                        default_values = MARBL_json_dict[category][node]["default_value"]['GCM == "CESM"']
                                     else:
-                                        values.append(value)
-                            elif type(default_values) == type (u''):
-                                values = default_values.encode('utf-8')
+                                        default_values = MARBL_json_dict[category][node]["default_value"]["default"]
+                                else:
+                                    default_values = MARBL_json_dict[category][node]["default_value"]
+                                if isinstance(default_values, list):
+                                    values = []
+                                    for value in default_values:
+                                        if type(value) == type (u''):
+                                            values.append(value.encode('utf-8'))
+                                        else:
+                                            values.append(value)
+                                elif type(default_values) == type (u''):
+                                    values = default_values.encode('utf-8')
+
                 # exclude getting CAM and POP default value - it is included in the description text
                 elif comp not in _exclude_defaults_comps:
                     for default in defaults:
@@ -335,9 +377,14 @@ def _main_func(options, work_dir):
 
                 # append this node_dict to the group_list
                 group_list.append(node_dict)
+                if category == "MARBL_derived_types":
+                    real_category = derived_category[node]
 
             # update the group_list for this category in the html_dict
-            category_group = category
+            if category == "MARBL_derived_types":
+                category_group = real_category
+            else:
+                category_group = category
             html_dict[category_group] = group_list
 
     # load up jinja template

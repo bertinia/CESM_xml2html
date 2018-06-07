@@ -208,19 +208,41 @@ def _main_func(options, work_dir):
                 for root_varname in category_dict[category].keys():
                     for real_category in category_dict[category][root_varname].keys():
                         for component in category_dict[category][root_varname][real_category]:
+                            MARBL_json_var = MARBL_json_dict[real_category][root_varname]["datatype"][component]
                             if "subcategory" in MARBL_json_dict[real_category][root_varname]["datatype"][component].keys():
-                                group = MARBL_json_dict[real_category][root_varname]["datatype"][component]["subcategory"]
+                                group = MARBL_json_var["subcategory"]
                                 if group not in _exclude_groups[comp]:
                                     marbl_varname = "%s%%%s" % (root_varname, component)
-                                    derived_desc[marbl_varname] = MARBL_json_dict[real_category][root_varname]["datatype"][component]["longname"]
+                                    derived_desc[marbl_varname] = MARBL_json_var["longname"]
                                     if root_varname == "autotrophs":
                                         derived_entry_root[marbl_varname] = "dtype(%d)" % MARBL_default_settings.settings_dict['autotroph_cnt']
+                                        derived_default_value[marbl_varname] = []
+                                        for key in ['((autotroph_sname)) == "sp"', '((autotroph_sname)) == "diat"', '((autotroph_sname)) == "diaz"']:
+                                            if key in MARBL_json_var["default_value"].keys():
+                                                derived_default_value[marbl_varname].append(MARBL_json_var["default_value"][key])
+                                            else:
+                                                derived_default_value[marbl_varname].append(MARBL_json_var["default_value"]["default"])
                                     elif root_varname == "zooplankton":
                                         derived_entry_root[marbl_varname] = "dtype(%d)" % MARBL_default_settings.settings_dict['zooplankton_cnt']
+                                        derived_default_value[marbl_varname] = []
+                                        for key in ['((zooplankton_sname)) == "zoo"']:
+                                            if key in MARBL_json_var["default_value"].keys():
+                                                derived_default_value[marbl_varname].append(MARBL_json_var["default_value"][key])
+                                            else:
+                                                derived_default_value[marbl_varname].append(MARBL_json_var["default_value"]["default"])
                                     elif root_varname == "grazing":
                                         derived_entry_root[marbl_varname] = "dtype(%d,%d)" % \
                                                  (MARBL_default_settings.settings_dict['autotroph_cnt'] ,
                                                   MARBL_default_settings.settings_dict['zooplankton_cnt'])
+                                        derived_default_value[marbl_varname] = []
+                                        for key in ['((grazing_sname)) == "sp_zoo"', '((grazing_sname)) == "diat_zoo"', '((grazing_sname)) == "diaz_zoo"']:
+                                            if isinstance(MARBL_json_var["default_value"], dict):
+                                                if key in MARBL_json_var["default_value"].keys():
+                                                    derived_default_value[marbl_varname].append(MARBL_json_var["default_value"][key])
+                                                else:
+                                                    derived_default_value[marbl_varname].append(MARBL_json_var["default_value"]["default"])
+                                            else:
+                                                derived_default_value[marbl_varname].append(MARBL_json_var["default_value"])
                                     else:
                                         sys.exit("Error: unknown derived type root '%s'" % root_varname)
                                     derived_entry_type[marbl_varname] = MARBL_json_dict[real_category][root_varname]["datatype"][component]["datatype"].encode('utf-8')
@@ -354,7 +376,10 @@ def _main_func(options, work_dir):
 #                        print "%s = %s" % (node, values)
                     else:
                         if category == "MARBL_derived_types":
-                            derived_default_value[node] = []
+                            if node in derived_default_value.keys():
+                                default_values = derived_default_value[node]
+                            else:
+                                default_values = []
                         else:
                             if "default_value" in MARBL_json_dict[category][node].keys():
                                 if isinstance(MARBL_json_dict[category][node]["default_value"], dict):
@@ -366,15 +391,15 @@ def _main_func(options, work_dir):
                                         default_values = MARBL_json_dict[category][node]["default_value"]["default"]
                                 else:
                                     default_values = MARBL_json_dict[category][node]["default_value"]
-                                if isinstance(default_values, list):
-                                    values = []
-                                    for value in default_values:
-                                        if type(value) == type (u''):
-                                            values.append(value.encode('utf-8'))
-                                        else:
-                                            values.append(value)
-                                elif type(default_values) == type (u''):
-                                    values = default_values.encode('utf-8')
+                        if isinstance(default_values, list):
+                            values = []
+                            for value in default_values:
+                                if type(value) == type (u''):
+                                    values.append(value.encode('utf-8'))
+                                else:
+                                    values.append(value)
+                        elif type(default_values) == type (u''):
+                            values = default_values.encode('utf-8')
 
                 # exclude getting CAM and POP default value - it is included in the description text
                 elif comp not in _exclude_defaults_comps:

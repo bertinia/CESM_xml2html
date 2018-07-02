@@ -1,6 +1,8 @@
 # CESM xml2html
 
 Python tools for auto-generating HTML from CESM and CIME XML configuration files.
+The jinja2 template files use the CESM web site skins and styles. Modeling groups
+other than CESM will want to modify the templates for their specific model.
 
 ## Requirements
   

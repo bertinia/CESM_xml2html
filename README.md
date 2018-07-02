@@ -1,10 +1,12 @@
 # CESM xml2html
 
 Python tools for auto-generating HTML from CESM and CIME XML configuration files.
+The jinja2 template files use the CESM web site skins and styles. Modeling groups
+other than CESM will want to modify the templates for their specific model.
 
 ## Requirements
   
-  CIME v?
+  CIME v maint-5.6 (06/26/2018 or later)
   
   CESM >= 2.0.beta09
   
@@ -44,17 +46,26 @@ Options:
 ***************************************************
 Steps to generate compsets html 
 
-   >compdef2html.py --htmlfile compsets.html --version CESM2.0
+   >compsetdef2html.py --htmlfile compsets.html --version CESM2.0
 
 ***************************************************
 Steps to generate the grids html
 
-1. run cime/scripts/query_config --grids --long > rids.txt
+1. run cime/scripts/query_config --grids --long > grids.txt
 2. edit the grids.txt to remove all lines up to the first line containing 'alias:'
-2. griddef2html.py --txtfile grids.txt --htmlfile grids.html --version CESM2.0
+2. run griddef2html.py --txtfile /fully-qualified-path-to/grids.txt --htmlfile /fully-qualified-path-to/grids.html --version CESM2.0
 
 ***************************************************
 
 Steps to generate the machines html
 
-  >machdef2html.py --htmlfile machines.html --version CESM2.0 --supported yellowstone,cheyenne --tested edison,hobart,cori-knl,cori-haswell,yellowstone,cheyenne
+   >machdef2html.py --htmlfile /fully-qualified-path-to/machines.html --version CESM2.0 --supported cheyenne,hobart --tested cori,edison,stampede,bluewaters,theta
+
+***************************************************
+
+There are 2 scripts in this repo to generate all namelist definition files and all CASEROOT variable files for all components
+
+   >gen_all_nml
+   >gen_all_input
+
+Check the variables CESMROOT and OUTPUT at the top of the files to be sure the directory paths are correct. 

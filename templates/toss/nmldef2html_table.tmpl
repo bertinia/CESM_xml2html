@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <LINK REL="SHORTCUT ICON"
+        HREF="http://www.cesm.ucar.edu/styles/modern/img/favicon.png">
+  <head>
+    <meta charset="utf-8">
+    <title>CESM2 Series Public Release</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+
+    <!-- css -->
+    <!--#include virtual="/styles/modern/css/css-include.html" -->
+    
+    <!-- Theme skin -->
+    <link href="/styles/modern/skins/default.css" rel="stylesheet" />
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" type="text/css" href="/media/css/ie.css" />
+    <![endif]-->
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
+    <style type="text/css" class="init">
+	div.container { max-width: 1200px }
+        td.details-control {
+           background: url('/images/plus.gif') no-repeat center center;
+           cursor: pointer;
+        }
+        tr.shown td.details-control {
+           background: url('/images/minus.gif') no-repeat center center;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    
+    <script>
+    function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Description:</td>'+
+            '<td><pre>'+d.name+'</pre></td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Valid Values::</td>'+
+            '<td><pre>'+d.name+'</pre></td>'+
+        '</tr>'+
+	'</table>';
+    }
+
+     $(document).ready( function () {
+     var table = $('#nmlTable').DataTable( {
+       "iDispalyLength": 50,
+       "aLengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+       "sPaginationType": "full_numbers",
+       "aaSorting": [[1, "desc"]],
+    } );
+
+     // Add event listener for opening and closing details
+     $('#nmlTable tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+     } );
+    } );
+    </script>
+    
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+	
+        <div class="navbar navbar-default navbar-static-top">
+          <div class="container">
+            
+            <!-- navbar header -->
+            <!--#include virtual="/styles/modern/includes/header/navbar-header.html" -->
+            <!-- end navbar header -->
+            
+            <!-- search -->
+            <!--#include virtual="/styles/modern/includes/header/search.html" -->
+            <!-- end search -->
+            
+            <!-- main navigation -->
+            <!--#include virtual="/styles/modern/includes/navigation/models-nav.html" -->
+            <!-- end main navigation -->
+            
+          </div>
+        </div>
+      </header>
+      <!-- end header -->
+      
+      <section id="inner-headline">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <ul class="breadcrumb">
+		<li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
+                <li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
+		<li><a href="/models/cesm2.0/components_namelists/index.html">CESM2.0  Component Namelists</a><i class="icon-angle-right"></i></li>
+		<li class="active">{{ comp }} Fortran Namelist Definitions</li>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+      </section>
+
+      <section id="content">
+	<div class="container">
+	  <div class="row">
+	    <div class="post-image">
+	      <div class="post-heading">
+		<h2>{{ cesm_version }} {{ comp }} Fortran Namelist Definitions</h2>
+	      </div>
+	    </div>
+            <br/>
+              
+            <!--  ---------------------------------------------------------------------  -->
+            <h4 class="separator"> Component tag: {{ comptag }}</h4>
+	    <h5>HTML created on: 2018-04-07</h5>
+	    
+            <!--  ---------------------------------------------------------------------  -->
+
+	    <table id="nmlTable" class="display nowrap">
+	      <thead>
+		<td>Variable</td>
+		<td>XML Group</td>
+		<td>Category</td>
+		<td>Entry Type</td>
+		<td>Valid Values</td>
+		<td>Description and Default Value</td>
+	      <thead>
+		<tbody>
+		  {% for category, var_list in html_dict|dictsort %}
+		  {% for var in var_list|sort(attribute='name') %}
+		  <tr>
+		    <td>{{ var['name'] }}</td>
+		    <td>{{ var['group_name'] }}</td>
+		    <td>{{ category|e }}</td>
+		    <td>{{ var['entry_type'] }}</td>
+		    <td>{{ var['valid_values'] }}</td>
+		    <td>{{ var['desc'] }}</td>
+		  </tr>
+		  {% endfor %}
+		  {% endfor %}
+		</tbody>
+	    </table>
+
+	  </div>
+	</div>
+      </section>
+
+      <footer>
+	<div class="container">
+          <!-- footer -->
+          <!--#include virtual="/styles/modern/includes/footer/footer.html" -->
+          <!-- end footer -->
+	</div>
+        <div id="sub-footer">
+          <!-- navbar subfooter -->
+          <!--#include virtual="/styles/modern/includes/footer/subfooter.html" -->
+          <!-- end subfooter -->
+        </div>
+        <div class="col-lg-6">
+          <!-- Social Media Include -->
+          <!--#include virtual="/styles/modern/includes/footer/social-media-inc.html" -->
+          <!-- end Social Media Include -->
+        </div>
+      </footer>
+
+    </div>
+    <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+    <script>
+      // Check if the nsf badge is there
+      if ( !($(".nsf-header")[0]) ) {
+	// create the nsf badge div
+	var div = '<div class="nsf-header"> <a href="http://www.nsf.gov/"> <img src="/styles/modern/includes/header/ncar_header_nsf_only.png"title="Sponsored by NSF"alt="Sponsored by NSF"> </a> </div>';
+
+	// insert it
+	$('.search-container').after(div);
+      }
+    </script>
+  </body>
+</html>

@@ -1,170 +1,189 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
+  <LINK REL="SHORTCUT ICON"
+        HREF="http://www.cesm.ucar.edu/styles/modern/img/favicon.png">
   <head>
+    <meta charset="utf-8">
+    <title>CESM2 Series Public Release</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+
+    <!-- css -->
+    <!--#include virtual="/styles/modern/css/css-include.html" -->
+    
+    <!-- Theme skin -->
+    <link href="/styles/modern/skins/default.css" rel="stylesheet" />
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" type="text/css" href="/media/css/ie.css" />
+    <![endif]-->
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
 
     <style type="text/css">
-      body {
-         font-family:'Open Sans', Arial, sans-serif;
-         font-size:14px;
-         font-weight:300;
-         line-height:1.6em;
-         color:#656565;
-         width: 90%;
-         align: center;
-      }
-
-      .container {
-         padding: 0 30px 0 30px;
-         padding-top: 0px;
-         padding-right: 30px;
-         padding-bottom: 30px;
-         padding-left: 30px;
-         position: relative;
-      }
-      
-      dt { color:#656565; font-weight: bold }
-
-      .accordionItem h2 { margin: 0; font-size: 1.1em; padding: 0.4em; color: #000; background-color: #E3E4E6; border-bottom: 1px solid #66d; width: 90%}
-      .accordionItem h2:hover { cursor: pointer; }
-      .accordionItem div { margin: 0; padding: 1em 0.4em; background-color: #eef; border-bottom: 1px solid #66d; width: 90%}
-      .accordionItem.hide h2 { color: #000; background-color: #E3E4E6; width: 90%}
-      
-      .detailsBtn { background-color: #E3E4E6; }
-
-      #variable { color:#66d; font-size: 1.2em; font-weight: bold; display: inline-block; margin-right: 30px; width: 350px; }
-      #emphasis { color:#656565; font-weight: bold; display: inline-block; }
-      #small { color:#9f9f9f; display: inline-block; }
-
+        #description { background-color: #c5edcb; }
+	#wrapit  { word-wrap: break-word;
+                   white-space: normal; }
     </style>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/javascript">
-    //<![CDATA[
 
-    var accordionItems = new Array();
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    function init() {
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
 
-      // Grab the accordion items from the page
-      var divs = document.getElementsByTagName( 'div' );
-      for ( var i = 0; i < divs.length; i++ ) {
-        if ( divs[i].className == 'accordionItem' ) accordionItems.push( divs[i] );
-      }
+    <script>
+    $(document).ready( function () {
+	var table = $('#nmlTable').DataTable( {
+	    "responsive": true,
+	    "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]	    
+	} );
 
-      // Assign onclick events to the accordion item headings
-      for ( var i = 0; i < accordionItems.length; i++ ) {
-        var h2 = getFirstChildWithTagName( accordionItems[i], 'H2' );
-        h2.onclick = toggleItem;
-      }
-
-      // Hide all accordion item bodies 
-      for ( var i = 0; i < accordionItems.length; i++ ) {
-        accordionItems[i].className = 'accordionItem hide';
-        $(accordionItems[i]).find('div').slideUp();
-      }
-    }
-
-    function toggleItem() {
-      var itemClass = this.parentNode.className;
-
-      // Hide all items
-      for ( var i = 0; i < accordionItems.length; i++ ) {
-        accordionItems[i].className = 'accordionItem hide';
-        $(accordionItems[i]).find('div').slideUp();
-      }
-
-      // Show this item if it was previously hidden
-      if ( itemClass == 'accordionItem hide' ) {
-        this.parentNode.className = 'accordionItem';
-        $(this).parent().find('div').slideDown();
-      }
-    }
-
-    function getFirstChildWithTagName( element, tagName ) {
-      for ( var i = 0; i < element.childNodes.length; i++ ) {
-        if ( element.childNodes[i].nodeName == tagName ) return element.childNodes[i];
-      }
-    }
-
-    function hideAll() {
-      // Hide all accordian items
-      for ( var i = 0; i < accordionItems.length; i++ ) {
-        accordionItems[i].className = 'accordionItem hide';
-        $(accordionItems[i]).find('div').slideUp();
-      }
-    }
-
-    function showAll() {
-      // show all accordian items
-      for ( var i = 0; i < accordionItems.length; i++ ) {
-        accordionItems[i].className = 'accordionItem hide';
-        $(accordionItems[i]).find('div').slideDown();
-      }
-    }
-
-     //]]>
+	// Handle click on "Expand All" button
+	$('#btn-show-all-children').on('click', function(){
+	    // Expand row details
+            table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click');
+	});
+	
+	// Handle click on "Collapse All" button
+	$('#btn-hide-all-children').on('click', function(){
+            // Collapse row details
+            table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
+	});
+    } );
     </script>
-
+    
   </head>
-  <body onload="init()">
-    <div class="container">
-        <h1>Component Model Namelist Definitions for <b>{{ comp }}</b></h1>
-	<p style="font-size: 0.9em;">
-	  SVN component tag: {{ svntag }}<br>
-	  CESM Version: {{ cesm_version }}<br>
-	  HTML created on: {{ today }}
-	</p>
-  	<p>
-	This page contains the complete list of <b>{{ comp }}</b> namelist variables available.<br/>
-	They are grouped by categories designed to aid browsing.  <br/>
-	Clicking on the name of a variable will display additional descriptive information.<br/>  
-	Click on the "Show Details" button and then cntl+F key to search for specific strings in this file.
-	</p>
-
-	<button class="detailsBtn" onclick="showAll();">Show Details</button>
-	<button class="detailsBtn" onclick="hideAll();">Hide Details</button>
-
-	{% for category, var_list in html_dict|dictsort %}
-	<h2>Category: {{ category|e }}</h2>
-	{% for var in var_list|sort(attribute='name') %}
-	<div class="accordionItem">
-	  <h2><span id="variable">{{ var['name'] }}</span> <span id="emphasis">{{ var['short_desc']|e }}</span>
-	      {% if var['group_name']|length > 1 %}
-	      <br/><span id="small">Group: {{ var['group_name'] }}
-              </span>{% endif %}</h2>
-	  <div>
-	    <dl>
-	      {% if var['desc']|length > 1 %}
-	      <dt>Description</dt>
-	      <dd>{{ var['desc'] }}</dd>
-	      {% endif %}
-
-	      {% if var['entry_type']|length > 1 %}	    
-	      <dt>Type</dt>
-	      <dd>{{ var['entry_type'] }}</dd>
-	      {% endif %}
-	    
-	      {% if var['valid_values']|length > 1 %}	    
-	      <dt>Valid Values</dt>
-	      <dd>{{ var['valid_values']|e }}</dd>
-	      {% endif %}
-	    
-	      {% if var['value']|length > 1 %}	    
-	      <dt>Default Value</dt>
-	      <dd>{{ var['value'] }}</dd>
-	      {% endif %}
-
-	      {% if var['group_name']|length > 1 %}	    
-	      <dt>XML Group Name</dt>
-	      <dd>{{ var['group_name'] }}</dd>
-	      {% endif %}
-
-	    </dl>
+  <body>
+    <div id="wrapper">
+      <header>
+	
+        <div class="navbar navbar-default navbar-static-top">
+          <div class="container">
+            
+            <!-- navbar header -->
+            <!--#include virtual="/styles/modern/includes/header/navbar-header.html" -->
+            <!-- end navbar header -->
+            
+            <!-- search -->
+            <!--#include virtual="/styles/modern/includes/header/search.html" -->
+            <!-- end search -->
+            
+            <!-- main navigation -->
+            <!--#include virtual="/styles/modern/includes/navigation/models-nav.html" -->
+            <!-- end main navigation -->
+            
+          </div>
+        </div>
+      </header>
+      <!-- end header -->
+      
+      <section id="inner-headline">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <ul class="breadcrumb">
+               <li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
+                <li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
+                <li><a href="/models/cesm2.0">CESM2 Series Public Release</a><i class="icon-angle-right"></i></li>
+                <li><a href="/models/cesm2.0/component_settings/index.html">CESM2 Component Configuration Settings</a><i class="icon-angle-right"></i></li>
+                <li class="active">{{ comp }}{{ compversion }} Fortran Namelist Definitions</li>
+	      </ul>
+	    </div>
 	  </div>
 	</div>
-	{% endfor %}
-	{% endfor %}
+      </section>
+
+      <section id="content">
+	<div class="container">
+	  <div class="row">
+	    <div class="post-image">
+	      <div class="post-heading">
+		<h2>{{ comp }}{{ compversion }} Fortran Namelist Definitions</h2>
+	      </div>
+	    </div>
+              
+            <!--  ---------------------------------------------------------------------  -->
+            <h4 class="separator"> Component tag: {{ comptag }}</h4>
+	    <h5>HTML created on: {{ today }}</h5>
+            <!--  ---------------------------------------------------------------------  -->
+
+            <button id="btn-show-all-children" type="button">Expand All</button>
+            <button id="btn-hide-all-children" type="button">Collapse All</button>
+            <hr/>
+            <table id="nmlTable" class="display wrap">
+	      <thead>
+		<tr>
+		  <th>Variable</th>
+		  <th>Namelist Group</th>
+		  <th>Category</th>
+		  <th>Entry Type</th>
+		  <th class="none">Valid Values</th>
+		  <th class="none">Possible Default Values</th>
+		  <th class="none">Description and out-of-the-box Default</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		{% for category, var_list in html_dict|dictsort %}
+		{% for var in var_list|sort(attribute='name') %}
+		<tr>
+		  <td>{{ var['name']|replace("___","&"|e) }}</td>
+		  <td>{{ var['group_name'] }}</td>
+		  <td>{{ category|replace("___","&"|e) }}</td>
+		  <td>{{ var['entry_type'] }}</td>
+		  <td>{{ var['valid_values'] }}</td>
+		  <td>{{ var['default_values'] }}</td>
+		  <td><pre id="description">{{ var['desc'] }}</pre></td>
+		</tr>
+		{% endfor %}
+		{% endfor %}
+              </tbody>
+              <tfoot>
+		<tr>
+		  <th>Variable</th>
+		  <th>Namelist Group</th>
+		  <th>Category</th>
+		  <th>Entry Type</th>
+		  <th class="none">Valid Values</th>
+		  <th class="none">Possible Default Values</th>
+		  <th class="none">Description and out-of-the-box Default</th>
+		</tr>
+	      </tfoot>
+	    </table>
+	  </div>
+	</div>
+      </section>
+
+      <footer>
+	<div class="container">
+          <!-- footer -->
+          <!--#include virtual="/styles/modern/includes/footer/footer.html" -->
+          <!-- end footer -->
+	</div>
+        <div id="sub-footer">
+          <!-- navbar subfooter -->
+          <!--#include virtual="/styles/modern/includes/footer/subfooter.html" -->
+          <!-- end subfooter -->
+        </div>
+        <div class="col-lg-6">
+          <!-- Social Media Include -->
+          <!--#include virtual="/styles/modern/includes/footer/social-media-inc.html" -->
+          <!-- end Social Media Include -->
+        </div>
+      </footer>
+
     </div>
+    <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+    <script>
+      // Check if the nsf badge is there
+      if ( !($(".nsf-header")[0]) ) {
+	// create the nsf badge div
+	var div = '<div class="nsf-header"> <a href="http://www.nsf.gov/"> <img src="/styles/modern/includes/header/ncar_header_nsf_only.png"title="Sponsored by NSF"alt="Sponsored by NSF"> </a> </div>';
+
+	// insert it
+	$('.search-container').after(div);
+      }
+    </script>
   </body>
 </html>

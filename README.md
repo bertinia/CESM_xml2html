@@ -4,7 +4,7 @@ Python tools for auto-generating HTML from CESM and CIME XML configuration files
 
 ## Requirements
   
-  CIME v?
+  CIME v maint-5.6 (06/26/2018 or later)
   
   CESM >= 2.0.beta09
   
@@ -44,7 +44,7 @@ Options:
 ***************************************************
 Steps to generate compsets html 
 
-   >compdef2html.py --htmlfile compsets.html --version CESM2.0
+   >compsetdef2html.py --htmlfile compsets.html --version CESM2.0
 
 ***************************************************
 Steps to generate the grids html
@@ -57,5 +57,13 @@ Steps to generate the grids html
 
 Steps to generate the machines html
 
-run machdef2html.py --htmlfile /fully-qualified-path-to/machines.html --version CESM2.0 --supported cheyenne,hobart --tested cori,edison,stampede,bluewaters,theta
+   >machdef2html.py --htmlfile /fully-qualified-path-to/machines.html --version CESM2.0 --supported cheyenne,hobart --tested cori,edison,stampede,bluewaters,theta
 
+***************************************************
+
+There are 2 scripts in this repo to generate all namelist definition files and all CASEROOT variable files for all components
+
+   >gen_all_nml
+   >gen_all_input
+
+Check the variables CESMROOT and OUTPUT at the top of the files to be sure the directory paths are correct. 

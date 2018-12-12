@@ -15,7 +15,11 @@ other than CESM will want to modify the templates for their specific model.
   >pip install --user jinja2
 
   CIMEROOT environment variable pointing to local CIME root location
-  
+
+  On CGD machines, jinja2 is available in python2.7.14
+
+  >module load lang/python/2.7.14
+
 ## Python tools
 
 ***************************************************
@@ -46,26 +50,45 @@ Options:
 ***************************************************
 Steps to generate compsets html 
 
-   >compsetdef2html.py --htmlfile compsets.html --version CESM2.0
+   >compsetdef2html.py --htmlfile compsets.html --version CESM2.Y.Z
+
+Update the /cesmweb/html/models/cesm2/config/2.Y.Z/rows-include-comp.html
+files to include the new version in the pulldown option menu
+
+rm /cesmweb/html/models/cesm2/config/compsets.html
+ln -s /cesmweb/html/models/cesm2/config/2.Y.Z/compsets.html
 
 ***************************************************
 Steps to generate the grids html
 
 1. run cime/scripts/query_config --grids --long > grids.txt
 2. edit the grids.txt to remove all lines up to the first line containing 'alias:'
-2. run griddef2html.py --txtfile /fully-qualified-path-to/grids.txt --htmlfile /fully-qualified-path-to/grids.html --version CESM2.0
+2. run griddef2html.py --txtfile /fully-qualified-path-to/grids.txt --htmlfile /fully-qualified-path-to/grids.html --version CESM2.Y.Z
+
+update all the /cesmweb/html/models/cesm2/config/2.Y.Z/grids.html files with new version in pulldown option menu
+rm /cesmweb/html/models/cesm2/config/grids.html
+ln -s /cesmweb/html/models/cesm2/config/2.Y.Z/grids.html
 
 ***************************************************
-
 Steps to generate the machines html
 
-   >machdef2html.py --htmlfile /fully-qualified-path-to/machines.html --version CESM2.0 --supported cheyenne,hobart --tested cori,edison,stampede,bluewaters,theta
+   >machdef2html.py --htmlfile /fully-qualified-path-to/machines.html --version CESM2.Y.Z --supported cheyenne,hobart --tested cori,edison,stampede2,bluewaters,theta
+
+update all the /cesmweb/html/models/cesm2/config/2.Y.Z/machines.html files with new version in pulldown option menu
+rm /cesmweb/html/models/cesm2/config/machines.html
+ln -s /cesmweb/html/models/cesm2/config/2.Y.Z/machines.html
 
 ***************************************************
+
 
 There are 2 scripts in this repo to generate all namelist definition files and all CASEROOT variable files for all components
 
    >gen_all_nml
    >gen_all_input
 
-Check the variables CESMROOT and OUTPUT at the top of the files to be sure the directory paths are correct. 
+Check the variables CESMROOT and OUTPUT at the top of the files to be sure the directory paths are correct.
+
+Update the /cesmweb/html/models/settings/2.Y.Z/index.html files to include a new dropdown option in the verion menu
+rm /cesmweb/html/models/settings/current
+ln -s /cesmweb/html/models/settings/2.Y.Z current
+

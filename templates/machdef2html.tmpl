@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <LINK REL="SHORTCUT ICON"
-        HREF="http://www.cesm.ucar.edu/styles/modern/img/favicon.png">
   <head>
     <meta charset="utf-8">
-    <title>CESM2 Series Public Release</title>
+    <title>CESM2 Machine Definition</title>
+    <link rel="shortcut icon" href="/styles/modern/img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
+    <meta name="author" content="" />
 
     <!-- css -->
     <!--#include virtual="/styles/modern/css/css-include.html" -->
@@ -17,45 +17,13 @@
     <link rel="stylesheet" type="text/css" href="/media/css/ie.css" />
     <![endif]-->
     
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="/styles/modern/css/datatables.min.css" />
 
     <style type="text/css">
         #details { background-color: #c5edcb; }
     </style>
-
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
-
-    <script>
-    $(document).ready( function () {
-	var table = $('#machTable').DataTable( {
-	    "responsive": true,
-	    "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-            "columnDefs": [
-               { "orderData": 5, "targets": 0 },
-            ]
-        } );
-
-	// Handle click on "Expand All" button
-	$('#btn-show-all-children').on('click', function(){
-	    // Expand row details
-            table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click');
-	});
-	
-	// Handle click on "Collapse All" button
-	$('#btn-hide-all-children').on('click', function(){
-            // Collapse row details
-            table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
-	});
-    } );
-    </script>
-    
   </head>
+
   <body>
     <div id="wrapper">
       <header>
@@ -70,6 +38,10 @@
             <!-- search -->
             <!--#include virtual="/styles/modern/includes/header/search.html" -->
             <!-- end search -->
+
+            <!-- NSF header -->
+	    <!--#include virtual="/styles/modern/includes/header/nsf-header.html" -->
+	    <!-- end NSF header -->
             
             <!-- main navigation -->
             <!--#include virtual="/styles/modern/includes/navigation/models-nav.html" -->
@@ -79,52 +51,80 @@
         </div>
       </header>
       <!-- end header -->
-      
+
       <section id="inner-headline">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <ul class="breadcrumb">
-               <li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
-                <li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
-                <li><a href="/models/cesm2.0">CESM2 Series Public Release</a><i class="icon-angle-right"></i></li>
-                <li class="active">Machine Definitions</li>
+	<div class="container">
+	  <div class="row">
+	    <div class="col-lg-12">
+	      <ul class="breadcrumb">
+		<li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
+		<li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
+		<li><a href="/models/current.html">CESM Supported Releases</a><i class="icon-angle-right"></i></li>
+		<li><a href="/models/cesm2">CESM2</a><i class="icon-angle-right"></i></li>
+		<li class="active">Machine Definitions</li>
 	      </ul>
 	    </div>
 	  </div>
 	</div>
       </section>
 
+
       <section id="content">
 	<div class="container">
-	  <div class="row">
-	    <div class="post-image">
-	      <div class="post-heading">
-		<h2>Machine Definitions</h2>
+	  <div class="row clear-marginbot">
+	    <div class="col-lg-12">
+	      <div class="post-image">
+		<div class="dropdown pull-right">
+		  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    CESM2 Version <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		    <li><a class="" href="/models/cesm2/config/2.1.0/machines.html">CESM2.1.0</a></li>
+		    <li><a class="" href="/models/cesm2/config/2.0.1/machines.html">CESM2.0.1</a></li>
+		    <li><a class="" href="/models/cesm2/config/2.0.0/machines.html">CESM2.0.0</a></li>
+		  </ul>
+		</div>
+
+		<div class="post-heading">
+		  <h2>Machine Definitions</h2>
+		</div>
 	      </div>
 	    </div>
-	    <p style="font-size: 0.9em;">
-	      Model Version: {{ model_version }}<br/>
-	      HTML created on: {{ today }}<br/>
-	      <ul>
-		<li><a href="http://esmci.github.io/cime/users_guide/machine.html">CIME Defining the machine Documentation </a></li>
-		<li><a href="https://docs.google.com/spreadsheets/d/15QUqsXD1Z0K_rYNTlykBvjTRt8s0XcQw0cfAj9DZbj0/edit#gid=0">CESM2 machine/compiler/test status spreadsheet</a></li>
-	      </ul>
-	    </p>
-	    <p>
-	      A support level of <b>Scientific</b> indicates that the machine has passed statistical validation and 
-	      CESM regression testing and may be used for large coupled experiments.<br/>
-	      A support level of <b>Tested</b> indicates that the machine has passed funtional CESM regression testing 
-	      but may not necessarily by appropriate for large coupled experiments due to machine
-	      restrictions; for example, limited number of nodes and disk space.
-	    </p>
+	  </div>
 
-	    <hr/>
-	    
-            <button id="btn-show-all-children" type="button">Expand All</button>
-            <button id="btn-hide-all-children" type="button">Collapse All</button>
-            <hr/>
-            <table id="machTable" class="display nowrap">
+	  <div class="row small">
+	    <div class="col-lg-6">
+	      <p><a href="http://esmci.github.io/cime/users_guide/machine.html">CIME Defining the machine Documentation </a></p>
+	      <p><a href="https://docs.google.com/spreadsheets/d/15QUqsXD1Z0K_rYNTlykBvjTRt8s0XcQw0cfAj9DZbj0/edit#gid=0">CESM2 machine/compiler/test status spreadsheet</a></p>
+	    </div>
+
+	    <div class="col-lg-6 text-right">
+	      <p>Model Version: <span class="label label-default">{{ model_version }}</span></p>
+	      <p>HTML created on: <span class="label label-info">{{ today }}</span></p>
+	    </div>
+	  </div>
+
+	  <div class="row">
+	    <div class="post-border-bottom">
+	      <h4 class="clear-marginbot">Support Levels:</h4>
+	      <p>A support level of <strong>Scientific</strong> indicates that the machine has passed statistical validation and CESM regression testing and may be used for large coupled experiments.</p> 
+
+	      <p>A support level of <strong>Tested</strong> indicates that the machine has passed funtional CESM regression testing but may not necessarily by appropriate for large coupled experiments due to machine restrictions; for example, limited number of nodes and disk space.</p>
+	    </div>
+
+            <!-- table buttons start -->
+            <div class="btns-show-hide" style="">
+	      <button type="button" class="btn btn-default btn-sm" id="btn-show-all-children">
+		<i class="fa fa-folder-open"></i> Show All
+	      </button>
+	      
+	      <button type="button" class="btn btn-default btn-sm" id="btn-hide-all-children">
+		<i class="fa fa-folder-open"></i> Hide All
+	      </button>
+	    </div>
+	    <!-- table buttons end -->
+
+            <table id="machTable" class="table table-condensed table-striped">
 	      <thead>
 		<tr>
 		  <th>Name</th>
@@ -166,34 +166,39 @@
       </section>
 
       <footer>
-	<div class="container">
           <!-- footer -->
-          <!--#include virtual="/styles/modern/includes/footer/footer.html" -->
+          <!--#include virtual="/styles/modern/includes/footer/footer-inc.html" -->
           <!-- end footer -->
-	</div>
-        <div id="sub-footer">
-          <!-- navbar subfooter -->
-          <!--#include virtual="/styles/modern/includes/footer/subfooter.html" -->
-          <!-- end subfooter -->
-        </div>
-        <div class="col-lg-6">
-          <!-- Social Media Include -->
-          <!--#include virtual="/styles/modern/includes/footer/social-media-inc.html" -->
-          <!-- end Social Media Include -->
-        </div>
       </footer>
 
     </div>
     <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+    
+    <!--#include virtual="/styles/modern/js/js-include.html" -->
+	<script type="text/javascript" src="/styles/modern/js/datatables.min.js"></script> 
     <script>
-      // Check if the nsf badge is there
-      if ( !($(".nsf-header")[0]) ) {
-	// create the nsf badge div
-	var div = '<div class="nsf-header"> <a href="http://www.nsf.gov/"> <img src="/styles/modern/includes/header/ncar_header_nsf_only.png"title="Sponsored by NSF"alt="Sponsored by NSF"> </a> </div>';
+    $(document).ready( function () {
+	var table = $('#machTable').DataTable( {
+	    "responsive": true,
+	    "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+            "columnDefs": [
+               { "orderData": 5, "targets": 0 },
+            ]
+        } );
 
-	// insert it
-	$('.search-container').after(div);
-      }
+	// Handle click on "Expand All" button
+	$('#btn-show-all-children').on('click', function(){
+	    // Expand row details
+            table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click');
+	});
+	
+	// Handle click on "Collapse All" button
+	$('#btn-hide-all-children').on('click', function(){
+            // Collapse row details
+            table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
+	});
+    } );
     </script>
+
   </body>
 </html>

@@ -4,4 +4,7 @@
 # Ignore emacs backup files
 *~
 
+# ignore toss dirs
+toss*
+
 

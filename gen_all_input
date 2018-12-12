@@ -6,11 +6,11 @@ OUTPUT=/home/aliceb/CESM_xml2html/toss
 
 # CAM
 echo "CAM"
-./compinputdef2html.py --inputfile $CESMROOT/components/cam/cime_config/config_component.xml --comp CAM --htmlfile $OUTPUT/cam_input.html --comptag cam_cesm2_0_rel_10 --compversion 6.0
+./compinputdef2html.py --inputfile $CESMROOT/components/cam/cime_config/config_component.xml --comp CAM --htmlfile $OUTPUT/cam_input.html --comptag cam_cesm2_1_rel_05 --compversion 6.0
 
 # CICE
 echo "CICE"
-./compinputdef2html.py --inputfile $CESMROOT/components/cice/cime_config/config_component.xml --comp CICE --htmlfile $OUTPUT/cice_input.html --comptag cice5_cesm2_0_rel_02 --compversion 5.0
+./compinputdef2html.py --inputfile $CESMROOT/components/cice/cime_config/config_component.xml --comp CICE --htmlfile $OUTPUT/cice_input.html --comptag cice5_20181109 --compversion 5.0
 
 # CISM
 echo "CISM"
@@ -18,57 +18,57 @@ echo "CISM"
 
 # CLM - not sure how to handle CLM4.0 since it wasn't a CIME compliant model and doesn't have a unique config_component.xml file
 echo "CLM"
-./compinputdef2html.py --inputfile $CESMROOT/components/clm/cime_config/config_component.xml --comp CLM --htmlfile $OUTPUT/clm4_5_input.html --comptag release-cesm2.0.02
+./compinputdef2html.py --inputfile $CESMROOT/components/clm/cime_config/config_component.xml --comp CLM --htmlfile $OUTPUT/clm5_0_input.html --comptag release-clm5.0.14
 #./compinputdef2html.py --inputfile $CESMROOT/components/clm/cime_config/??? --comp CLM --htmlfile $OUTPUT/clm4_0_input.html --comptag clm4.0.81
 
 # MOSART
 echo "MOSART"
-./compinputdef2html.py --inputfile $CESMROOT/components/mosart/cime_config/config_component.xml --comp MOSART --htmlfile $OUTPUT/mosart_input.html --comptag release-cesm2.0.00
+./compinputdef2html.py --inputfile $CESMROOT/components/mosart/cime_config/config_component.xml --comp MOSART --htmlfile $OUTPUT/mosart_input.html --comptag release-cesm2.0.03
 
 # POP2
 # pop namelist required *a lot* of manual edits to get it parse through CIME tools and namelist_defaults.xml is kinda hopeless
 echo "POP2"
-./compinputdef2html.py --inputfile $CESMROOT/components/pop/cime_config/config_component.xml --comp POP2 --htmlfile $OUTPUT/pop2_input.html --comptag pop2_cesm2_0_rel_n04
+./compinputdef2html.py --inputfile $CESMROOT/components/pop/cime_config/config_component.xml --comp POP2 --htmlfile $OUTPUT/pop2_input.html --comptag pop2_cesm2_1_rel_n01
 
 # RTM
 echo "RTM"
-./compinputdef2html.py --inputfile $CESMROOT/components/rtm/cime_config/config_component.xml --comp RTM --htmlfile $OUTPUT/rtm_input.html --comptag release-cesm2.0.00
+./compinputdef2html.py --inputfile $CESMROOT/components/rtm/cime_config/config_component.xml --comp RTM --htmlfile $OUTPUT/rtm_input.html --comptag release-cesm2.0.02
 
 # WW3
 echo "WW3"
-./compinputdef2html.py --inputfile $CESMROOT/components/ww3/cime_config/config_component.xml --comp WW3 --htmlfile $OUTPUT/ww3_input.html --comptag ww3_cesm2_0_rel_01
+./compinputdef2html.py --inputfile $CESMROOT/components/ww3/cime_config/config_component.xml --comp WW3 --htmlfile $OUTPUT/ww3_input.html --comptag ww3_cesm2_1_rel_01
 
 ###### data model namelists
 
 # DATM
 echo "DATM"
-./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/datm/cime_config/config_component.xml --comp DATM --htmlfile $OUTPUT/datm_input.html --comptag cime_cesm2_0_rel_05 --compversion 2.0
+./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/datm/cime_config/config_component.xml --comp DATM --htmlfile $OUTPUT/datm_input.html --comptag cime5.6.10_cesm2_1_rel_06 --compversion 2.1
 
 # DESP
 echo "DESP"
-./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/desp/cime_config/config_component.xml --comp DESP --htmlfile $OUTPUT/desp_input.html --comptag cime_cesm2_0_rel_05 --compversion 2.0
+./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/desp/cime_config/config_component.xml --comp DESP --htmlfile $OUTPUT/desp_input.html --comptag cime5.6.10_cesm2_1_rel_06 --compversion 2.1
 
 # DICE
 echo "DICE"
-./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/dice/cime_config/config_component.xml --comp DICE --htmlfile $OUTPUT/dice_input.html --comptag cime_cesm2_0_rel_05 --compversion 2.0
+./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/dice/cime_config/config_component.xml --comp DICE --htmlfile $OUTPUT/dice_input.html --comptag cime5.6.10_cesm2_1_rel_06 --compversion 2.1
 
 # DLND
 echo "DLND"
-./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/dlnd/cime_config/config_component.xml --comp DLND --htmlfile $OUTPUT/dlnd_input.html --comptag cime_cesm2_0_rel_05 --compversion 2.0
+./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/dlnd/cime_config/config_component.xml --comp DLND --htmlfile $OUTPUT/dlnd_input.html --comptag cime5.6.10_cesm2_1_rel_06 --compversion 2.1
 
 # DOCN - required a tweek to the "QOBS" string in DOCN_MODE desc because the quotes were invalid ascii characters
 echo "DOCN"
-./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/docn/cime_config/config_component.xml --comp DOCN --htmlfile $OUTPUT/docn_input.html --comptag cime_cesm2_0_rel_05 --compversion 2.0
+./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/docn/cime_config/config_component.xml --comp DOCN --htmlfile $OUTPUT/docn_input.html --comptag cime5.6.10_cesm2_1_rel_06 --compversion 2.1
 
 # DROF
 echo "DROF"
-./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/drof/cime_config/config_component.xml --comp DROF --htmlfile $OUTPUT/drof_input.html --comptag cime_cesm2_0_rel_05 --compversion 2.0
+./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/drof/cime_config/config_component.xml --comp DROF --htmlfile $OUTPUT/drof_input.html --comptag cime5.6.10_cesm2_1_rel_06 --compversion 2.1
 
 # DWAV
 echo "DWAV"
-./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/dwav/cime_config/config_component.xml --comp DWAV --htmlfile $OUTPUT/dwav_input.html --comptag cime_cesm2_0_rel_05 --compversion 2.0
+./compinputdef2html.py --inputfile $CESMROOT/cime/src/components/data_comps/dwav/cime_config/config_component.xml --comp DWAV --htmlfile $OUTPUT/dwav_input.html --comptag cime5.6.10_cesm2_1_rel_06 --compversion 2.1
 
 # Driver
 echo "DRIVER"
-./compinputdef2html.py --inputfile $CESMROOT/cime/src/drivers/mct/cime_config/config_component.xml --comp Driver --htmlfile $OUTPUT/drv_input.html --comptag cime_cesm2_0_rel_05
-./compinputdef2html.py --inputfile $CESMROOT/cime/src/drivers/mct/cime_config/config_component_cesm.xml --comp Driver --htmlfile $OUTPUT/drv_input_cesm.html --comptag cime_cesm2_0_rel_05
+./compinputdef2html.py --inputfile $CESMROOT/cime/src/drivers/mct/cime_config/config_component.xml --comp Driver --htmlfile $OUTPUT/drv_input.html --comptag cime5.6.10_cesm2_1_rel_06
+./compinputdef2html.py --inputfile $CESMROOT/cime/src/drivers/mct/cime_config/config_component_cesm.xml --comp Driver --htmlfile $OUTPUT/drv_input_cesm.html --comptag cime5.6.10_cesm2_1_rel_06

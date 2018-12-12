@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <LINK REL="SHORTCUT ICON"
-        HREF="http://www.cesm.ucar.edu/styles/modern/img/favicon.png">
   <head>
     <meta charset="utf-8">
     <title>CESM2 Component Sets Definition</title>
+    <link rel="shortcut icon" href="/styles/modern/img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
+    <meta name="author" content="" />
 
     <!-- css -->
     <!--#include virtual="/styles/modern/css/css-include.html" -->
@@ -14,55 +14,23 @@
     <!-- Theme skin -->
     <link href="/styles/modern/skins/default.css" rel="stylesheet" />
     <!--[if lte IE 9]>
-    <link rel="stylesheet" type="text/css" href="/media/css/ie.css" />
-    <![endif]-->
-    
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/ie.css" />
+	<![endif]-->
+
+    <link rel="stylesheet" href="/styles/modern/css/datatables.min.css" />
 
     <style type="text/css">
-        #details { background-color: #c5edcb; }
-	#wrapit  { word-wrap: break-word;
-                   white-space: normal; }
+      #details { background-color: #c5edcb; }
+      #wrapit  { word-wrap: break-word;white-space: normal; }
     </style>
-
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
-
-    <script>
-    $(document).ready( function () {
-	var table = $('#compsetTable').DataTable( {
-	    "responsive": true,
-            "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-            "order": [ [ 3, 'desc'], [ 0, 'asc'] ]
- 	} );
-
-	// Handle click on "Expand All" button
-	$('#btn-show-all-children').on('click', function(){
-	    // Expand row details
-            table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click');
-	});
-	
-	// Handle click on "Collapse All" button
-	$('#btn-hide-all-children').on('click', function(){
-            // Collapse row details
-            table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
-	});
-    } );
-    </script>
     
   </head>
   <body>
     <div id="wrapper">
+      <!-- header start -->
       <header>
-	
         <div class="navbar navbar-default navbar-static-top">
           <div class="container">
-            
             <!-- navbar header -->
             <!--#include virtual="/styles/modern/includes/header/navbar-header.html" -->
             <!-- end navbar header -->
@@ -71,160 +39,167 @@
             <!--#include virtual="/styles/modern/includes/header/search.html" -->
             <!-- end search -->
             
-            <!-- main navigation -->
+	    <!-- NSF header -->
+	    <!--#include virtual="/styles/modern/includes/header/nsf-header.html" -->
+	    <!-- end NSF header -->
+
+	    <!-- main navigation -->
             <!--#include virtual="/styles/modern/includes/navigation/models-nav.html" -->
             <!-- end main navigation -->
-            
           </div>
         </div>
       </header>
-      <!-- end header -->
+      <!-- header end -->
       
+      <!-- breadcrumb start -->
       <section id="inner-headline">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <ul class="breadcrumb">
-               <li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
-                <li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
-                <li><a href="/models/cesm2.0">CESM2 Series Public Release</a><i class="icon-angle-right"></i></li>
-                <li class="active">Component Set (compset) Definitions</li>
+	<div class="container">
+	  <div class="row">
+	    <div class="col-lg-12">
+	      <ul class="breadcrumb">
+		<li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
+		<li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
+		<li><a href="/models/current.html">CESM Supported Releases</a><i class="icon-angle-right"></i></li>
+		<li><a href="/models/cesm2">CESM2</a><i class="icon-angle-right"></i></li>
+		<li class="active">Component Set Definitions</li>
 	      </ul>
 	    </div>
 	  </div>
 	</div>
       </section>
+      <!-- breadcrumb end -->
 
+      <!-- main content start -->
       <section id="content">
 	<div class="container">
-	  <div class="row">
-	    <div class="post-image">
-	      <div class="post-heading">
-		<h2>Component Set (compset) Definitions</h2>
-	      </div>
-	    </div>
-	    <p style="font-size: 0.9em;">
-	      Model Version: {{ model_version }}<br/>
-	      HTML created on: {{ today }}<br/>
-	      Reference: <a href="http://esmci.github.io/cime/users_guide/compsets.html">CIME Model Component Sets Documentation</a><br/>
-	      Grid Resolutions: <a href="/models/cesm2/config/grids.html">CESM2 Grid Resolution Definitions</a><br/>
-	      Support Levels:</br>
-	      &nbsp;&nbsp;&nbsp;<b>Defined</b> - The component set is defined but has not been tested.<br/>
-	      &nbsp;&nbsp;&nbsp;<b>Tested</b> - The defined component set has been tested with a scientifically supported grid resolution.<br/>
-	      &nbsp;&nbsp;&nbsp;<b>Scientific</b> - The tested component set has been <a href="/models/cesm2/scientifically-validated-cesm2.html">validated scientifically</a>. 
-	    </p>
-	    
-            <button id="btn-show-all-children" type="button">Expand All</button>
-            <button id="btn-hide-all-children" type="button">Collapse All</button>
-            <hr/>
-            <table id="compsetTable" class="display nowrap">
-	      <thead>
-		<tr>
-		  <th>Alias</th>
-		  <th>Long name</th>
-		  <th>Defined By</th>
-		  <th>Support Level</th>
-		  <th class="none">Scientifically Supported Grids</th>
-		  <th class="none">Details</th>
-		</tr>
-	      </thead>
-	      <tbody>
-		{% for longname, values in compset_dict.iteritems() %}
-		<tr>
-		  <td>{{ values.alias }}</td>
-		  <td>{{ longname }}</td>
-                  <td>{{ values.defined_by }}</td>
-		  {% if values.science_support_grids|length > 0 %}
-                  <td>Scientific / Tested</td>
-                  {% else %}
-                  <td>Defined</td>
-    		  {% endif %}
-		  <td>
-		    {% if values.science_support_grids|length > 0 %}
-                    <ul>
-                    {% for grid in values.science_support_grids %}
-		    <li id="details" style="width: 20%">{{ grid }}</li>
-		    {% endfor %}
-		    </ul>
-		    {% endif %}
-                  </td>
-		  <td>
-		    <table style="table-layout: fixed; width: 100%">
-		      <thead>
-			<tr id="details">
-			  <th style="width: 20%"></th>
-			  <th style="width: 20%">Value</th>
-			  <th style="width: 60%">Description</th>
-			</tr>
-		      </thead>
-		      <tbody>
-			<tr>
-			  <th id="details">Initialization Time</th>
-			  <td>{{ values.init_opt }}</td>
-			  <td>1850: Pre-Industrial; 2000 present day:<br/>
-			  Additional initialization times defined by components.</td>
-			</tr>
-			<tr>
-			  <th id="details">Atmosphere</th>
-			  <td>{{ values.atm_opt }}</td>
-			  <td id="wrapit">{{ values.ATM_desc }}</td>
-			</tr>
-			<tr>
-			  <th id="details">Land</th>
-			  <td>{{ values.lnd_opt }}</td>
-			  <td id="wrapit">{{ values.LND_desc }}</td>
-			</tr>
-			<tr>
-			  <th id="details">Sea-Ice</th>
-			  <td>{{ values.seaice_opt }}</td>
-			  <td id="wrapit">{{ values.ICE_desc }}</td>
-			</tr>
-			<tr>
-			  <th id="details">Ocean</th>
-			  <td>{{ values.ocn_opt }}</td>
-			  <td id="wrapit">{{ values.OCN_desc }}</td>
-			</tr>
-			<tr>
-			  <th id="details">River runoff</th>
-			  <td>{{ values.rof_opt }}</td>
-			  <td id="wrapit">{{ values.ROF_desc }}</td>
-			</tr>
-			<tr>
-			  <th id="details">Land Ice</th>
-			  <td>{{ values.glc_opt }}</td>
-			  <td id="wrapit">{{ values.GLC_desc }}</td>
-			</tr>
-			<tr>
-			  <th id="details">Wave</th>
-			  <td>{{ values.wav_opt }}</td>
-			  <td id="wrapit">{{ values.WAV_desc }}</td>
-			</tr>
-			{% if values.bgc_opt %}
-			<tr>
-			  <th id="details">Ocean Biogeochemistry</th>
-			  <td>{{ values.bgc_opt }}</td>
-			  {% if "BDRD" in values.bgc_opt %}
-			  <td>BGC CO2=diag, rad CO2=diag:</td>
-			  {% elif "BPRP" in values.bgc_opt %}
-			  <td>BGC CO2=prog, rad CO2=prog:</td>
-			  {% else %}
-			  <td></td>
-			  {% endif %}
-			</tr>
-			{% endif %}
-			{% if values.esp_opt %}
-			<tr>
-			  <th id="details">External System Processing</th>
-			  <td>{{ values.esp_opt }}</td>
-			  <td id="wrapit">{{ values.ESP_desc }}</td>
-			</tr>
-			{% endif %}
 
-		      </tbody>
-		    </table>
-		  </td>
-		</tr>
-              {% endfor %}
+	  <!-- top rows -->
+	  <!--#include virtual="/models/cesm2/config/2.1.0/rows-include-comp.html" -->
+
+	  <div class="row">
+	    <div class="col-lg-12">
+
+	      <!-- table buttons start -->
+	      <div class="btns-show-hide" style="">
+		<button type="button" class="btn btn-default btn-sm" id="btn-show-all-children">
+		  <i class="fa fa-folder-open"></i> Show All
+		</button>
+
+		<button type="button" class="btn btn-default btn-sm" id="btn-hide-all-children">
+		  <i class="fa fa-folder-open"></i> Hide All
+		</button>
+	      </div>
+	      <!-- table buttons end -->
+
+	  
+	      <table id="compsetTable" class="table table-striped table-condensed">
+		<thead>
+		  <tr>
+		    <th>Alias</th>
+		    <th>Long name</th>
+		    <th>Defined By</th>
+		    <th>Support Level</th>
+		    <th class="none">Scientifically Supported Grids</th>
+		    <th class="none">Details</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  {% for longname, values in compset_dict.iteritems() %}
+		  <tr>
+		    <td>{{ values.alias }}</td>
+		    <td>{{ longname }}</td>
+                    <td>{{ values.defined_by }}</td>
+		    {% if values.science_support_grids|length > 0 %}
+                    <td>Scientific / Tested</td>
+                    {% else %}
+                    <td>Defined</td>
+    		    {% endif %}
+                    <td>
+		      {% if values.science_support_grids|length > 0 %}
+                      <ul>
+			{% for grid in values.science_support_grids %}
+			<li id="details" style="width: 20%">{{ grid }}</li>
+			{% endfor %}
+		      </ul>
+		      {% endif %}
+                    </td>
+                    <td>
+		      <table style="table-layout: fixed; width: 100%">
+			<thead>
+			  <tr id="details">
+			    <th style="width: 20%"></th>
+			    <th style="width: 20%">Value</th>
+			    <th style="width: 60%">Description</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+			    <th id="details">Initialization Time</th>
+			    <td>{{ values.init_opt }}</td>
+			    <td>1850: Pre-Industrial; 2000 present day:<br/>
+			      Additional initialization times defined by components.</td>
+			  </tr>
+			  <tr>
+			    <th id="details">Atmosphere</th>
+			    <td>{{ values.atm_opt }}</td>
+			    <td id="wrapit">{{ values.ATM_desc }}</td>
+			  </tr>
+			  <tr>
+			    <th id="details">Land</th>
+			    <td>{{ values.lnd_opt }}</td>
+			    <td id="wrapit">{{ values.LND_desc }}</td>
+			  </tr>
+			  <tr>
+			    <th id="details">Sea-Ice</th>
+			    <td>{{ values.seaice_opt }}</td>
+			    <td id="wrapit">{{ values.ICE_desc }}</td>
+			  </tr>
+			  <tr>
+			    <th id="details">Ocean</th>
+			    <td>{{ values.ocn_opt }}</td>
+			    <td id="wrapit">{{ values.OCN_desc }}</td>
+			  </tr>
+			  <tr>
+			    <th id="details">River runoff</th>
+			    <td>{{ values.rof_opt }}</td>
+			    <td id="wrapit">{{ values.ROF_desc }}</td>
+			  </tr>
+			  <tr>
+			    <th id="details">Land Ice</th>
+			    <td>{{ values.glc_opt }}</td>
+			    <td id="wrapit">{{ values.GLC_desc }}</td>
+			  </tr>
+			  <tr>
+			    <th id="details">Wave</th>
+			    <td>{{ values.wav_opt }}</td>
+			    <td id="wrapit">{{ values.WAV_desc }}</td>
+			  </tr>
+			  {% if values.bgc_opt %}
+			  <tr>
+			    <th id="details">Ocean Biogeochemistry</th>
+			    <td>{{ values.bgc_opt }}</td>
+			    {% if "BDRD" in values.bgc_opt %}
+			    <td>BGC CO2=diag, rad CO2=diag:</td>
+			    {% elif "BPRP" in values.bgc_opt %}
+			    <td>BGC CO2=prog, rad CO2=prog:</td>
+			    {% else %}
+			    <td></td>
+			    {% endif %}
+			  </tr>
+			  {% endif %}
+			  {% if values.esp_opt %}
+			  <tr>
+			    <th id="details">External System Processing</th>
+			    <td>{{ values.esp_opt }}</td>
+			    <td id="wrapit">{{ values.ESP_desc }}</td>
+			  </tr>
+			  {% endif %}
+			  
+			</tbody>
+		      </table>
+		    </td>
+                 </tr>
+                {% endfor %}
               </tbody>
               <tfoot>
 		<tr>
@@ -238,38 +213,40 @@
 	      </tfoot>
 	    </table>
 	  </div>
-	</div>
+
       </section>
 
       <footer>
-	<div class="container">
-          <!-- footer -->
-          <!--#include virtual="/styles/modern/includes/footer/footer.html" -->
-          <!-- end footer -->
-	</div>
-        <div id="sub-footer">
-          <!-- navbar subfooter -->
-          <!--#include virtual="/styles/modern/includes/footer/subfooter.html" -->
-          <!-- end subfooter -->
-        </div>
-        <div class="col-lg-6">
-          <!-- Social Media Include -->
-          <!--#include virtual="/styles/modern/includes/footer/social-media-inc.html" -->
-          <!-- end Social Media Include -->
-        </div>
+	<!-- footer -->
+	<!--#include virtual="/styles/modern/includes/footer/footer-inc.html" -->
+	<!-- end footer -->
       </footer>
 
+      <!--#include virtual="/styles/modern/js/js-include.html" -->
+      <script type="text/javascript" src="/styles/modern/js/datatables.min.js"></script> 
+
+      <script>
+	$(document).ready( function () {
+	var table = $('#compsetTable').DataTable( {
+	"responsive": true,
+	"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+	"order": [ [ 3, 'desc'], [ 0, 'asc'] ]
+	} );
+
+	// Handle click on "Expand All" button
+	$('#btn-show-all-children').on('click', function(){
+	// Expand row details
+	table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click');
+	});
+
+	// Handle click on "Collapse All" button
+	$('#btn-hide-all-children').on('click', function(){
+	// Collapse row details
+	table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
+	});
+	});
+      </script>
     </div>
     <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-    <script>
-      // Check if the nsf badge is there
-      if ( !($(".nsf-header")[0]) ) {
-	// create the nsf badge div
-	var div = '<div class="nsf-header"> <a href="http://www.nsf.gov/"> <img src="/styles/modern/includes/header/ncar_header_nsf_only.png"title="Sponsored by NSF"alt="Sponsored by NSF"> </a> </div>';
-
-	// insert it
-	$('.search-container').after(div);
-      }
-    </script>
-  </body>
+</body>
 </html>

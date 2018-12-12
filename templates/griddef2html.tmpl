@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <LINK REL="SHORTCUT ICON"
-        HREF="http://www.cesm.ucar.edu/styles/modern/img/favicon.png">
   <head>
     <meta charset="utf-8">
     <title>CESM2 Series Public Release</title>
+    <link rel="shortcut icon" href="/styles/modern/img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
+    <meta name="author" content="" />
 
     <!-- css -->
     <!--#include virtual="/styles/modern/css/css-include.html" -->
@@ -16,10 +16,9 @@
     <!--[if lte IE 9]>
     <link rel="stylesheet" type="text/css" href="/media/css/ie.css" />
     <![endif]-->
-    
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
 
+    <link rel="stylesheet" href="/styles/modern/css/datatables.min.css" />
+    
     <style type="text/css">
         #details { background-color: #c5edcb; }
 	.flex-container{
@@ -38,43 +37,9 @@
 	}
     </style>
 
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
-
-    <script>
-    $(document).ready( function () {
-	var table = $('#gridsTable').DataTable( {
-	    "responsive": true,
-	    "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]	    
-	} );
-
-	// Handle click on "Expand All" button
-	$('#btn-show-all-children').on('click', function(){
-	    // Expand row details
-            table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click');
-	});
-	
-	// Handle click on "Collapse All" button
-	$('#btn-hide-all-children').on('click', function(){
-            // Collapse row details
-            table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
-	});
-
-        $("#hide").click(function(){
-            $(".flex-container").hide();
-        });
-
-        $("#show").click(function(){
-            $(".flex-container").show();
-        });
-    } );
-    </script>
-    
   </head>
+
+
   <body>
     <div id="wrapper">
       <header>
@@ -89,6 +54,10 @@
             <!-- search -->
             <!--#include virtual="/styles/modern/includes/header/search.html" -->
             <!-- end search -->
+
+	    <!-- NSF header -->
+	    <!--#include virtual="/styles/modern/includes/header/nsf-header.html" -->
+	    <!-- end NSF header -->
             
             <!-- main navigation -->
             <!--#include virtual="/styles/modern/includes/navigation/models-nav.html" -->
@@ -106,8 +75,9 @@
               <ul class="breadcrumb">
                <li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
                 <li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
-                <li><a href="/models/cesm2.0">CESM2 Series Public Release</a><i class="icon-angle-right"></i></li>
-                <li class="active">Grid Resolution Definitions</li>
+               <li><a href="/models/cesm2.0">CESM Supported Releases</a><i class="icon-angle-right"></i></li>
+	       <li><a href="/models/cesm2">CESM2</a><i class="icon-angle-right"></i></li>
+               <li class="active">Grid Resolution Definitions</li>
 	      </ul>
 	    </div>
 	  </div>
@@ -116,21 +86,45 @@
 
       <section id="content">
 	<div class="container">
-	  <div class="row">
-	    <div class="post-image">
-	      <div class="post-heading">
-		<h2>Grid Resolution Definitions</h2>
+
+	  <div class="row clear-marginbot">
+	    <div class="col-lg-12">
+	      <div class="post-image">
+		<div class="dropdown pull-right">
+		  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    CESM2 Version <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		    <li><a class="" href="/models/cesm2/config/grids.html">CESM2.1.0</a></li>
+		    <li><a class="" href="/models/cesm2/config/2.0.1/grids.html">CESM2.0.1</a></li>
+		    <li><a class="" href="/models/cesm2/config/2.0.0/grids.html">CESM2.0.0</a></li>
+		  </ul>
+		</div>
+
+		<div class="post-heading">
+		  <h1>Grid Resolution Definitions</h1>
+		</div>
 	      </div>
 	    </div>
-	    <p style="font-size: 0.9em;">
-	      Model Version: {{ model_version }}<br/>
-	      HTML created on: {{ today }}<br/>
-	      Reference: <a href="http://esmci.github.io/cime/users_guide/grids.html">CIME Model Grid Documentation</a><br/>
-	      Compset Definitions: <a href="/models/cesm2/config/compsets.html">CESM2 Compset Definitions</a>
-	    </p>
-	    <p>
-	    <button id="hide">Hide Defaults and Description</button> <button id="show">Show Defaults and Description</button>
-	    </p>
+	  </div>
+
+
+	  <div class="row small">
+	    <div class="col-lg-6">
+	      <p>Reference: <a href="http://esmci.github.io/cime/users_guide/grids.html">CIME Model Grid Documentation</a></p>
+	      <p>Compset Definitions: <a href="/models/cesm2/config/compsets.html">CESM2 Compset Definitions</a></p>
+	    </div>
+
+	    <div class="col-lg-6 text-right">
+	      <p>Model Version: <span class="label label-default">{{ model_version }}</span></p>
+	      <p>HTML created on: <span class="label label-info">{{ today }}</span></p>
+	    </div>
+	  </div>
+
+
+	  <div class="row post-border-bottom">
+	    <div class="col-lg-12">
+	      <h2>Defaults and Description</h2>
 
 	    <div class="flex-container">
 	      <div class="fixed">
@@ -158,6 +152,7 @@
 		  <tr><td>wav</td> <td>WW3</td> <td>ww3a</td></tr>
 		</table>
 	      </div>
+
 	      <div class="flex-item">
 		<h4>Grid Naming Convention</h4>
 		  <br/>The notation for the grid longname is<br/>
@@ -181,13 +176,29 @@ not_compset   (Regular expression for compset matches that are not permitted thi
   And if there is no ocnice grid, such as for single column, the mask is null since it does not mean anything.
   </p>
 	      </div>
-	    </div>
+           </div>
+</div>
+</div>
 
-	    </div>
-            <button id="btn-show-all-children" type="button">Expand All</button>
-            <button id="btn-hide-all-children" type="button">Collapse All</button>
-            <hr/>
-            <table id="gridsTable" class="display nowrap">
+
+
+<h2>Grids Table</h2>
+
+<!-- table buttons start -->
+<div class="btns-show-hide" style="">
+  <button type="button" class="btn btn-default btn-sm" id="btn-show-all-children">
+    <i class="fa fa-folder-open"></i> Show All
+  </button>
+
+  <button type="button" class="btn btn-default btn-sm" id="btn-hide-all-children">
+    <i class="fa fa-folder-open"></i> Hide All
+  </button>
+</div>
+<!-- table buttons end -->
+
+
+
+           <table id="gridsTable" class="table table-condensed table-striped">
 	      <thead>
 		<tr>
 		  <th>Alias</th>
@@ -216,35 +227,44 @@ not_compset   (Regular expression for compset matches that are not permitted thi
 	</div>
       </section>
 
-      <footer>
-	<div class="container">
-          <!-- footer -->
-          <!--#include virtual="/styles/modern/includes/footer/footer.html" -->
-          <!-- end footer -->
-	</div>
-        <div id="sub-footer">
-          <!-- navbar subfooter -->
-          <!--#include virtual="/styles/modern/includes/footer/subfooter.html" -->
-          <!-- end subfooter -->
-        </div>
-        <div class="col-lg-6">
-          <!-- Social Media Include -->
-          <!--#include virtual="/styles/modern/includes/footer/social-media-inc.html" -->
-          <!-- end Social Media Include -->
-        </div>
-      </footer>
+<footer>
+  <!-- footer -->
+  <!--#include virtual="/styles/modern/includes/footer/footer-inc.html" -->
+  <!-- end footer -->
+</footer>
 
-    </div>
-    <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-    <script>
-      // Check if the nsf badge is there
-      if ( !($(".nsf-header")[0]) ) {
-	// create the nsf badge div
-	var div = '<div class="nsf-header"> <a href="http://www.nsf.gov/"> <img src="/styles/modern/includes/header/ncar_header_nsf_only.png"title="Sponsored by NSF"alt="Sponsored by NSF"> </a> </div>';
+</div>
+<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 
-	// insert it
-	$('.search-container').after(div);
-      }
-    </script>
-  </body>
+<!--#include virtual="/styles/modern/js/js-include.html" -->
+<script type="text/javascript" src="/styles/modern/js/datatables.min.js"></script> 
+<script>
+  $(document).ready( function () {
+  var table = $('#gridsTable').DataTable( {
+  "responsive": true,
+  "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]	    
+  } );
+
+  // Handle click on "Expand All" button
+  $('#btn-show-all-children').on('click', function(){
+  // Expand row details
+  table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click');
+  });
+  
+  // Handle click on "Collapse All" button
+  $('#btn-hide-all-children').on('click', function(){
+  // Collapse row details
+  table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
+  });
+
+  $("#hide").click(function(){
+  $(".flex-container").hide();
+  });
+
+  $("#show").click(function(){
+  $(".flex-container").show();
+  });
+  } );
+</script>
+</body>
 </html>

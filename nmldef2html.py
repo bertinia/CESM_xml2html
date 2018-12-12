@@ -148,7 +148,7 @@ def _main_func(options, work_dir):
             MARBL_json_dict = json.load(settings_file)
 
         # Set up MARBL_settings_file_class object with CESM (gx1v7) default values
-        MARBL_root = os.path.join(os.path.dirname(filename), "..")
+        MARBL_root = os.path.join(os.path.dirname(filename), "../..")
         sys.path.append(MARBL_root)
         from MARBL_tools import MARBL_settings_file_class
         MARBL_args=dict()
@@ -214,7 +214,8 @@ def _main_func(options, work_dir):
                                 if group not in _exclude_groups[comp]:
                                     marbl_varname = "%s%%%s" % (root_varname, component)
                                     derived_desc[marbl_varname] = MARBL_json_var["longname"]
-                                    if root_varname == "autotrophs":
+##                                    if root_varname == "autotrophs":
+                                    if "autotroph" in root_varname:
                                         derived_entry_root[marbl_varname] = "dtype(%d)" % MARBL_default_settings.settings_dict['autotroph_cnt']
                                         derived_default_value[marbl_varname] = []
                                         for key in ['((autotroph_sname)) == "sp"', '((autotroph_sname)) == "diat"', '((autotroph_sname)) == "diaz"']:
@@ -222,7 +223,8 @@ def _main_func(options, work_dir):
                                                 derived_default_value[marbl_varname].append(MARBL_json_var["default_value"][key])
                                             else:
                                                 derived_default_value[marbl_varname].append(MARBL_json_var["default_value"]["default"])
-                                    elif root_varname == "zooplankton":
+##                                    elif root_varname == "zooplankton":
+                                    elif "zooplankton" in root_varname:
                                         derived_entry_root[marbl_varname] = "dtype(%d)" % MARBL_default_settings.settings_dict['zooplankton_cnt']
                                         derived_default_value[marbl_varname] = []
                                         for key in ['((zooplankton_sname)) == "zoo"']:
@@ -230,7 +232,8 @@ def _main_func(options, work_dir):
                                                 derived_default_value[marbl_varname].append(MARBL_json_var["default_value"][key])
                                             else:
                                                 derived_default_value[marbl_varname].append(MARBL_json_var["default_value"]["default"])
-                                    elif root_varname == "grazing":
+##                                    elif root_varname == "grazing":
+                                    elif "grazing" in root_varname:
                                         derived_entry_root[marbl_varname] = "dtype(%d,%d)" % \
                                                  (MARBL_default_settings.settings_dict['autotroph_cnt'] ,
                                                   MARBL_default_settings.settings_dict['zooplankton_cnt'])

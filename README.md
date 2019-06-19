@@ -86,7 +86,8 @@ There are 2 scripts in this repo to generate all namelist definition files and a
    >gen_all_nml
    >gen_all_input
 
-Check the variables CESMROOT and OUTPUT at the top of the files to be sure the directory paths are correct.
+Check the variables CESMROOT and OUTPUT at the top of the files to be sure the directory paths are correct. Also, update the
+model component version values to match those in the CESM Externals.cfg file.
 
 Update the /cesmweb/html/models/settings/2.Y.Z/index.html files to include a new dropdown option in the verion menu
 rm /cesmweb/html/models/settings/current

@@ -1,12 +1,12 @@
 #!/bin/sh
 
-export CIMEROOT=/home/aliceb/cesm/cime
-CESMROOT=/home/aliceb/cesm
+export CIMEROOT=/home/aliceb/CESM/cime
+CESMROOT=/home/aliceb/CESM
 OUTROOT=/home/aliceb/CESM_xml2html/toss
 
 # CAM
 echo "CAM"
-./nmldef2html.py --nmlfile $CESMROOT/components/cam/bld/namelist_files/namelist_definition.xml --comp CAM --htmlfile $OUTROOT/cam_nml.html --comptag cam_cesm2_1_rel_29 --compversion 6.0
+./nmldef2html.py --nmlfile $CESMROOT/components/cam/bld/namelist_files/namelist_definition.xml --comp CAM --htmlfile $OUTROOT/cam_nml.html --comptag cam_cesm2_1_rel_41 --compversion 6.0
 
 # CICE
 echo "CICE"
@@ -14,13 +14,13 @@ echo "CICE"
 
 # CISM
 echo "CISM"
-./nmldef2html.py --nmlfile $CESMROOT/components/cism/bld/namelist_files/namelist_definition_cism.xml --comp CISM --htmlfile $OUTROOT/cism_nml.html --comptag release-cesm2.0.04
+./nmldef2html.py --nmlfile $CESMROOT/components/cism/bld/namelist_files/namelist_definition_cism.xml --comp CISM --htmlfile $OUTROOT/cism_nml.html --comptag cism-release-cesm2.1.2_02
 
 # CLM
 # had to remove one & manually in input namelist file for clm4_5
 # also desc elements, need to be pre formatted in order to wrap correctly in the data table
 echo "CLM5"
-./nmldef2html.py --nmlfile $CESMROOT/components/clm/bld/namelist_files/namelist_definition_clm4_5.xml --comp CLM --htmlfile $OUTROOT/clm5_0_nml.html --comptag release-clm5.0.25
+./nmldef2html.py --nmlfile $CESMROOT/components/clm/bld/namelist_files/namelist_definition_clm4_5.xml --comp CLM --htmlfile $OUTROOT/clm5_0_nml.html --comptag release-clm5.0.30
 echo "CLM4"
 ./nmldef2html.py --nmlfile $CESMROOT/components/clm/bld/namelist_files/namelist_definition_clm4_0.xml --comp CLM --htmlfile $OUTROOT/clm4_0_nml.html --comptag clm4.0.81
 
@@ -31,16 +31,16 @@ echo "MARBL"
 
 # MOSART
 echo "MOSART"
-./nmldef2html.py --nmlfile $CESMROOT/components/mosart/cime_config/namelist_definition_mosart.xml --comp MOSART --htmlfile $OUTROOT/mosart_nml.html --comptag release-cesm2.0.03
+./nmldef2html.py --nmlfile $CESMROOT/components/mosart/cime_config/namelist_definition_mosart.xml --comp MOSART --htmlfile $OUTROOT/mosart_nml.html --comptag release-cesm2.0.04
 
 # POP2
 echo "POP"
 # pop namelist required *a lot* of manual edits to get it to parse through the CIME tools and namelist_defaults.xml is kinda hopeless
-./nmldef2html.py --nmlfile ./pop_namelist_files/namelist_definition_pop.xml --comp POP2 --htmlfile $OUTROOT/pop2_nml.html --comptag pop2_cesm2_1_rel_n06
+./nmldef2html.py --nmlfile ./pop_namelist_files/namelist_definition_pop.xml --comp POP2 --htmlfile $OUTROOT/pop2_nml.html --comptag pop2_cesm2_1_rel_n09
 
 # RTM
 echo "RTM"
-./nmldef2html.py --nmlfile $CESMROOT/components/rtm/cime_config/namelist_definition_rtm.xml --comp RTM --htmlfile $OUTROOT/rtm_nml.html --comptag release-cesm2.0.02
+./nmldef2html.py --nmlfile $CESMROOT/components/rtm/cime_config/namelist_definition_rtm.xml --comp RTM --htmlfile $OUTROOT/rtm_nml.html --comptag release-cesm2.0.04
 
 # WW3
 echo "WW3"
@@ -50,34 +50,34 @@ echo "WW3"
 
 # DATM
 echo "DATM"
-./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/datm/cime_config/namelist_definition_datm.xml --comp DATM --htmlfile $OUTROOT/datm_nml.html --comptag cime5.6.19 --compversion 2.1
+./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/datm/cime_config/namelist_definition_datm.xml --comp DATM --htmlfile $OUTROOT/datm_nml.html --comptag cime5.6.32 --compversion 2.1
 
 # DESP
 echo "DESP"
-./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/desp/cime_config/namelist_definition_desp.xml --comp DESP --htmlfile $OUTROOT/desp_nml.html --comptag cime5.6.19 --compversion 2.1
+./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/desp/cime_config/namelist_definition_desp.xml --comp DESP --htmlfile $OUTROOT/desp_nml.html --comptag cime5.6.32 --compversion 2.1
 
 # DICE
 echo "DICE"
-./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/dice/cime_config/namelist_definition_dice.xml --comp DICE --htmlfile $OUTROOT/dice_nml.html --comptag cime5.6.19 --compversion 2.1
+./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/dice/cime_config/namelist_definition_dice.xml --comp DICE --htmlfile $OUTROOT/dice_nml.html --comptag cime5.6.32 --compversion 2.1
 
 # DLND
 echo "DLND"
-./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/dlnd/cime_config/namelist_definition_dlnd.xml --comp DLND --htmlfile $OUTROOT/dlnd_nml.html --comptag cime5.6.19 --compversion 2.1
+./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/dlnd/cime_config/namelist_definition_dlnd.xml --comp DLND --htmlfile $OUTROOT/dlnd_nml.html --comptag cime5.6.32 --compversion 2.1
 
 # DOCN
 echo "DOCN"
-./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/docn/cime_config/namelist_definition_docn.xml --comp DOCN --htmlfile $OUTROOT/docn_nml.html --comptag cime5.6.19 --compversion 2.1
+./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/docn/cime_config/namelist_definition_docn.xml --comp DOCN --htmlfile $OUTROOT/docn_nml.html --comptag cime5.6.32 --compversion 2.1
 
 # DROF
 echo "DROF"
-./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/drof/cime_config/namelist_definition_drof.xml --comp DROF --htmlfile $OUTROOT/drof_nml.html --comptag cime5.6.19 --compversion 2.1
+./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/drof/cime_config/namelist_definition_drof.xml --comp DROF --htmlfile $OUTROOT/drof_nml.html --comptag cime5.6.32 --compversion 2.1
 
 # DWAV
 echo "DWAV"
-./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/dwav/cime_config/namelist_definition_dwav.xml --comp DWAV --htmlfile $OUTROOT/dwav_nml.html --comptag cime5.6.19 --compversion 2.1
+./nmldef2html.py --nmlfile $CESMROOT/cime/src/components/data_comps/dwav/cime_config/namelist_definition_dwav.xml --comp DWAV --htmlfile $OUTROOT/dwav_nml.html --comptag cime5.6.32 --compversion 2.1
 
 # Driver
 echo "Driver"
-./nmldef2html.py --nmlfile $CESMROOT/cime/src/drivers/mct/cime_config/namelist_definition_drv.xml --comp Driver --htmlfile $OUTROOT/drv_nml.html --comptag cime5.6.19
+./nmldef2html.py --nmlfile $CESMROOT/cime/src/drivers/mct/cime_config/namelist_definition_drv.xml --comp Driver --htmlfile $OUTROOT/drv_nml.html --comptag cime5.6.32
 echo "Driver fields"
-./nmldef2html.py --nmlfile $CESMROOT/cime/src/drivers/mct/cime_config/namelist_definition_drv_flds.xml --comp Driver --htmlfile $OUTROOT/drv_fields_nml.html --comptag cime5.6.19
+./nmldef2html.py --nmlfile $CESMROOT/cime/src/drivers/mct/cime_config/namelist_definition_drv_flds.xml --comp Driver --htmlfile $OUTROOT/drv_fields_nml.html --comptag cime5.6.32

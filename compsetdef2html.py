@@ -20,7 +20,7 @@ import argparse
 try:
     import jinja2
 except:
-    raise SystemExit("ERROR: nmldef2html.py depends on the jinja2 template module. " /
+    raise SystemExit("ERROR: compsetdef2html.py depends on the jinja2 template module. " /
                      "Install using 'pip --user install jinja2'")
 
 # global variables
@@ -66,46 +66,47 @@ def _main_func(options, work_dir):
     compset_files = []
     compset_dict = {}
     for comp in components:
-        compset_file = files.get_value("COMPSETS_SPEC_FILE", attribute={"component":comp})
-        if compset_file not in compset_files:
-            expect(os.path.isfile(compset_file), "Could not find file {}".format(compset_file))
-            compset_files.append(compset_file)
-            compset = Compsets(infile=compset_file, files=files)
-            longnames = compset.get_compset_longnames()
-            for longname in longnames:
-                _, alias, science_support = compset.get_compset_match(name=longname)
-                elements = longname.split("_")
-                numelems = len(elements)
-                expect(numelems > 7, "This longname not supported {}".format(longname))
-                compset_dict[longname] = {"alias" : alias, "science_support_grids": science_support,
-                                          "defined_by": comp, "init_opt":elements[0], "atm_opt" : elements[1],
-                                          "lnd_opt": elements[2], "seaice_opt": elements[3], "ocn_opt":elements[4],
-                                          "rof_opt": elements[5], "glc_opt": elements[6], "wav_opt": elements[7]}
+        if comp != "nemo":
+            compset_file = files.get_value("COMPSETS_SPEC_FILE", attribute={"component":comp})
+            if compset_file not in compset_files:
+                expect(os.path.isfile(compset_file), "Could not find file {}".format(compset_file))
+                compset_files.append(compset_file)
+                compset = Compsets(infile=compset_file, files=files)
+                longnames = compset.get_compset_longnames()
+                for longname in longnames:
+                    _, alias, science_support = compset.get_compset_match(name=longname)
+                    elements = longname.split("_")
+                    numelems = len(elements)
+                    expect(numelems > 7, "This longname not supported {}".format(longname))
+                    compset_dict[longname] = {"alias" : alias, "science_support_grids": science_support,
+                                              "defined_by": comp, "init_opt":elements[0], "atm_opt" : elements[1],
+                                              "lnd_opt": elements[2], "seaice_opt": elements[3], "ocn_opt":elements[4],
+                                              "rof_opt": elements[5], "glc_opt": elements[6], "wav_opt": elements[7]}
 
-                for i in range(8, numelems):
-                    if elements[i].startswith("BGC"):
-                        compset_dict[longname].update({"bgc_opt":elements[i]})
-                    elif 'ESP' in elements[i]:
-                        compset_dict[longname].update({"esp_opt":elements[i]})
-                    elif elements[i] == 'TEST':
-                        logger.info("Longname is {}".format(longname))
-                    else:
-                        logger.warn("Unrecognized longname: {} {} {} ".format(longname, i, elements[i]))
+                    for i in range(8, numelems):
+                        if elements[i].startswith("BGC"):
+                            compset_dict[longname].update({"bgc_opt":elements[i]})
+                        elif 'ESP' in elements[i]:
+                            compset_dict[longname].update({"esp_opt":elements[i]})
+                        elif elements[i] == 'TEST':
+                            logger.info("Longname is {}".format(longname))
+                        else:
+                            logger.warn("Unrecognized longname: {} {} {} ".format(longname, i, elements[i]))
 
-                components = []
-                for element in elements:
-                    if element.startswith("BGC%") or element.startswith("TEST"):
-                        continue
-                    else:
-                        element_component = element.split('%')[0].lower()
-                        if "ww" not in element_component:
-                            element_component = re.sub(r'[0-9]*',"",element_component)
-                        components.append(element_component)
-                for i in range(1,len(components)):
-                    comp_class = comp_classes[i]
-                    comp_config_file = files.get_value("CONFIG_{}_FILE".format(comp_class), {"component":components[i]})
-                    compobj = Component(comp_config_file, comp_class)
-                    compset_dict[longname].update({"{}_desc".format(comp_class):compobj.get_description(longname)})
+                    components = []
+                    for element in elements:
+                        if element.startswith("BGC%") or element.startswith("TEST"):
+                            continue
+                        else:
+                            element_component = element.split('%')[0].lower()
+                            if "ww" not in element_component:
+                                element_component = re.sub(r'[0-9]*',"",element_component)
+                                components.append(element_component)
+                            for i in range(1,len(components)):
+                                comp_class = comp_classes[i]
+                                comp_config_file = files.get_value("CONFIG_{}_FILE".format(comp_class), {"component":components[i]})
+                                compobj = Component(comp_config_file, comp_class)
+                                compset_dict[longname].update({"{}_desc".format(comp_class):compobj.get_description(longname)})
 
                         
 ##    print ("compset_dict = {}".format(compset_dict))
